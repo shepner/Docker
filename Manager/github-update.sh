@@ -12,11 +12,10 @@ chmod 600 ~/etc/functions_github
 
 #refresh stuff
 install_update_script $GITHUBARCHIVE
-
+configure_dnsexit
 
 
 #install_mosh
-#configure_dnsexit
 #install_openvpn
 #install_docker_engine
 #install_docker_machine
