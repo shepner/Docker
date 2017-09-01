@@ -8,7 +8,7 @@ install_update_script() {
 
 ##################################################
 #DNSexit
-configure_dnsexit() {
+setup_dnsexit() {
   #update the script
   unzip -jo $1 Docker-master/Manager/home_bin/dnsexit.sh -d ~/bin
   chmod 550 ~/bin/dnsexit.sh
