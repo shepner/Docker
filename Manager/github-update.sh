@@ -12,7 +12,7 @@ chmod 600 ~/etc/functions_github
 
 #refresh stuff
 install_update_script $GITHUBARCHIVE
-configure_dnsexit
+setup_dnsexit $GITHUBARCHIVE
 
 
 #install_mosh
