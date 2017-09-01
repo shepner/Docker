@@ -1,14 +1,21 @@
 ##################################################
 #make future updates easier
 #usage:  install_update_script master.zip
+
 install_update_script() {
+  echo Installing github-update.sh
+  
   unzip -jo $1 Docker-master/Manager/github-update.sh -d ~
   chmod 700 ~/github-update.sh
 }
 
 ##################################################
 #DNSexit
+#usage:  setup_dnsexit master.zip
+
 setup_dnsexit() {
+  echo Setting up DNSexit support
+
   #update the script
   unzip -jo $1 Docker-master/Manager/home_bin/dnsexit.sh -d ~/bin
   chmod 550 ~/bin/dnsexit.sh
