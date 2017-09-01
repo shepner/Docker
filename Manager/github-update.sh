@@ -7,7 +7,7 @@ curl -L https://github.com/shepner/Docker/archive/master.zip > $GITHUBARCHIVE
 
 #refresh and load the github functions
 unzip -jo $GITHUBARCHIVE Docker-master/Manager/home_etc/functions_github -d ~/etc
-chmod 600 ~/etc/functions_github
+chmod 644 ~/etc/functions_github
 . ~/etc/functions_github
 
 #refresh stuff
