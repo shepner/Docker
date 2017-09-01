@@ -3,7 +3,7 @@
 GITHUBARCHIVE="master.zip"
 
 #fetch the latest files from gethub
-wget https://github.com/shepner/Docker/archive/$GITHUBARCHIVE
+curl -L https://github.com/shepner/Docker/archive/master.zip > $GITHUBARCHIVE
 
 #refresh and load the github functions
 unzip -jo $GITHUBARCHIVE Docker-master/Manager/home_etc/functions_github -d ~/etc
