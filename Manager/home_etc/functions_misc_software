@@ -1,0 +1,26 @@
+##################################################
+#unzip
+install_unzip () {
+  echo installing unzip
+  
+  sudo apt install unzip
+}
+
+##################################################
+#OpenVPN
+install_openvpn () {
+  echo installing and configuring OpenVPN
+  
+  sudo apt-get install network-manager-openvpn
+  
+  install_unzip
+  
+  sudo unzip -joq ~/vpn-udp-1195-vpn.asyla.org-config.zip vpn-udp-1195-vpn.asyla.org/* -d /etc/openvpn/
+  sudo ln -s /etc/openvpn/vpn-udp-1195-vpn.asyla.org.ovpn /etc/openvpn/client.conf
+  
+  if [ `grep -c ^AUTOSTART=\"all\" /etc/default/openvpn` -eq 0 ] ; then
+    echo Updating /etc/default/openvpn
+    echo 'AUTOSTART="all"' | sudo tee -a /etc/default/openvpn
+  fi
+  
+}
