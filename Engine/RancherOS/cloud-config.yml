@@ -1,0 +1,16 @@
+hostname: <hostname>
+
+rancher:
+  network:
+    interfaces:
+      eth*:
+       dhcp: false
+      eth0:
+       address: <host IP>/24
+       gateway: <gateway>
+    dns:
+      nameservers:
+        - 8.8.8.8
+
+ssh_authorized_keys:
+  - <public key>
