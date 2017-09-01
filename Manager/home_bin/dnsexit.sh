@@ -8,5 +8,5 @@ echo IP = $IP
 
 if [ "$DNSIP" != "$IP" ]; then
   echo "updating $HOST from $DNSIP to $IP"
-  curl -s "http://update.dnsexit.com/RemoteUpdate.sv?login=$USERID&password=$PASSWORD&host=$HOST&myip=$IP"
+  echo curl -s "http://update.dnsexit.com/RemoteUpdate.sv?login=$USERID&password=$PASSWORD&host=$HOST&myip=$IP"
 fi
