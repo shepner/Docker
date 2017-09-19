@@ -1,9 +1,9 @@
 FROM alpine:latest
 
 LABEL \
-  org.asyla.release-date="2015-02-12" \
+  org.asyla.release-date="2017-09-19" \
   org.asyla.maintainer="shepner@asyla.org" \
-  org.asyla.description="DNSmasq configured as I need it"
+  org.asyla.description="DNSmasq:  DNS Server"
 
 # Webproc release settings
 ENV WEBPROC_VERSION=0.1.7
@@ -17,10 +17,11 @@ RUN apk update \
 	&& chmod +x /usr/local/bin/webproc \
 	&& apk del .build-deps
 
-# Configure dnsmasq (for now)
+# Configure dnsmasq
 RUN mkdir -p /etc/default/
 RUN echo -e "ENABLED=1\nIGNORE_RESOLVCONF=yes" > /etc/default/dnsmasq
 COPY dnsmasq.conf /etc/dnsmasq.conf
+COPY resolv.conf /etc/resolv.conf
 
 # This is where we will be adding the mountpoint for the config file
 #VOLUME ["/mnt/dnsmasq"]
