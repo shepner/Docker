@@ -13,7 +13,7 @@ curl s 'http://www.dnsexit.com/ipupdate/dyndata.txt'
 echo validate the credentials
 curl -s 'http://update.dnsexit.com/ipupdate/account_validate.jsp?login=$USERID&password=$PASSWORD'
 
-echo verify the domain(s)
+echo verify the domain
 curl -s 'http://update.dnsexit.com/ipupdate/domains.jsp?login=$USERID'
 
 echo update the IP
