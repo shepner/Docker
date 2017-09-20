@@ -1,0 +1,17 @@
+hostname: de01b
+
+rancher:
+  network:
+    interfaces:
+      eth*:
+       dhcp: false
+      eth0:
+       address: 10.1.1.21/24
+       gateway: 10.1.1.1
+    dns:
+      nameservers:
+        - 208.67.222.222
+        - 208.67.220.220
+
+ssh_authorized_keys:
+  - <public key>
