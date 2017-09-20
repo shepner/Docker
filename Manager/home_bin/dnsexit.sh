@@ -8,7 +8,7 @@ echo DNSIP = $DNSIP
 echo IP = $IP
 
 echo verify the URL
-curl s "http://www.dnsexit.com/ipupdate/dyndata.txt"
+curl -s "http://www.dnsexit.com/ipupdate/dyndata.txt"
 
 echo validate the credentials
 curl -s "http://update.dnsexit.com/ipupdate/account_validate.jsp?login=$USERID&password=$PASSWORD"
