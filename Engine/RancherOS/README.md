@@ -11,7 +11,7 @@ make sure that the system will have internet access.  you wont be able to instal
 3.  obtain the ip address of the system:  ```ifconfig eth0```
 4.  on your local machine, generate the ssh keypair you intend to use:  ```ssh-keygen -t rsa```
 5.  ssh to the system:  ```ssh rancher@<ip address>```
-6.  create the config file using the template in this repo:  ```vi cloud-config.yml``` Note: dont forget to fill in the blanks!
+6.  create the config file using the appropriate template (cloud-config-<hostname>.yml):  ```vi cloud-config.yml``` Note: dont forget to fill in the blanks!
 7.  install RancherOS to disk and reboot:  ```sudo ros install -c cloud-config.yml -d /dev/sda```
 8.  the local machine should now be able to ssh using the key
 
