@@ -24,3 +24,30 @@ install_openvpn () {
   fi
   
 }
+
+##################################################
+#DNSexit
+#usage:  setup_dnsexit master.zip
+
+setup_dnsexit() {
+  echo Setting up DNSexit support
+
+  #update the script
+  unzip -joq $1 Docker-master/Manager/home_bin/dnsexit.sh -d ~/bin
+  chmod 550 ~/bin/dnsexit.sh
+
+  #make sure we have a config file
+  if [ ! -f ~/etc/dnsexit.conf ] ; then
+    unzip -joq $1 Docker-master/Manager/home_etc/dnsexit.conf -d ~/etc
+    echo "Be sure to edit ~/etc/dnsexit.conf"
+  fi
+  chmod 600 ~/etc/dnsexit.conf
+
+  #update the crontab if needed
+  if [ `grep -c dnsexit /etc/crontab` -eq 0 ] ; then
+    echo '*/2 * * * * ubuntu /home/ubuntu/bin/dnsexit.sh' | sudo tee -a /etc/crontab
+  fi
+  
+  #update DNS
+  ~/bin/dnsexit.sh
+}
