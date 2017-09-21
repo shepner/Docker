@@ -1,4 +1,4 @@
-hostname: de01b
+hostname: de02b
 
 rancher:
   network:
@@ -6,7 +6,7 @@ rancher:
       eth*:
        dhcp: false
       eth0:
-       address: 10.1.1.21/24
+       address: 10.1.1.23/24
        gateway: 10.1.1.1
     dns:
       nameservers:
