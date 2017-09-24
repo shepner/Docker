@@ -21,4 +21,10 @@ To [enable vmware tools](http://rancher.com/docs/os/system-services/adding-syste
 3.  start the service:  ```sudo ros service up open-vm-tools```
 4.  validate that it is running:  ```sudo ros service list ```
 
-Note: In VMware, RangerOS is Ubuntu 64bit
+VMware settings
+1.  Ubuntu Linux (64-bit)
+2.  CPU: 8
+3.  Memory:  16GB
+4.  Disk:  30GB
+5.  Network: 10.1.1.0/24
+6.  
