@@ -19,3 +19,8 @@ https://hub.docker.com/_/ubuntu/
 [Create a Docker Parent Image from scratch](https://docs.docker.com/engine/userguide/eng-image/baseimages/#creating-a-simple-parent-image-using-scratch)
 
 [Dockerfile best practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#general-guidelines-and-recommendations)
+
+
+---
+
+[Minio](https://www.minio.io/) is an open source object storage server with Amazon S3 compatible API
