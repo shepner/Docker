@@ -84,7 +84,7 @@ docker run -i -t --volume-driver=nfs -v nfshost/path:/mount ubuntu /bin/bash
 ### or better, just use NFS at the host
 ``` shell
 sudo apt-get install -y nfs-common
-sudo echo "nas03:/data1/common/00-Data /mnt nfs rw 0 0" >> /etc/fstab
+sudo echo "hostname:/some/path/here /mnt nfs rw 0 0" >> /etc/fstab
 sudo mount -a
 ```
 
