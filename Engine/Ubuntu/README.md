@@ -54,6 +54,10 @@ https://github.com/ContainX/docker-volume-netshare
 ``` shell
 sudo apt-get install -y nfs-common
 ```
+test to make sure it all works
+``` shell
+sudo mount -t nfs4 1.1.1.1:/mountpoint /mnt
+```
 2. Look for the latest release:  https://github.com/ContainX/docker-volume-netshare/releases/
 3. Install
 ``` shell
@@ -64,25 +68,32 @@ sudo dpkg -i docker-volume-netshare_0.34_amd64.deb
 ``` shell
 sudo vi /etc/default/docker-volume-netshare
 ```
-5. Start the service
+5. Start the service (from [here](https://www.howtogeek.com/216454/how-to-manage-systemd-services-on-a-linux-system/))
 ``` shell
-sudo service docker-volume-netshare start
+#sudo service docker-volume-netshare start
+sudo systemctl enable docker-volume-netshare.service
+sudo systemctl start docker-volume-netshare.service
 ```
 
 ### use Netshare
-1. start the service
-``` shell
-sudo docker-volume-netshare nfs
-```
-2. Launch a container
+1. Launch a container
 ``` shell
 docker run -i -t --volume-driver=nfs -v nfshost/path:/mount ubuntu /bin/bash
 ```
 
+### or better, just use NFS at the host
+``` shell
+sudo apt-get install -y nfs-common
+sudo echo "nas03:/data1/common/00-Data /mnt nfs rw 0 0" >> /etc/fstab
+sudo mount -a
+```
 
 
+---
 
-## Install LXD
+---
+
+## Install LXD (need to play with this more)
 [LXD](https://www.ubuntu.com/containers/lxd) is a linux hypervisor to run full OSs like containers.  More info can be found [here](https://linuxcontainers.org/lxd/getting-started-cli/)
 1. Activate LXD
 ``` shell
