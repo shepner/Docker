@@ -26,7 +26,7 @@ setup_dnsexit $GITHUBARCHIVE
 
 #####################################################
 #refresh and load all the docker stuff
-unzip -jo $GITHUBARCHIVE Docker-master/Manager/home_etc/functions_misc_software -d ~/etc
+unzip -jo $GITHUBARCHIVE Docker-master/Manager/home_etc/functions_docker -d ~/etc
 chmod 644 ~/etc/functions_docker
 . ~/etc/functions_docker
 
