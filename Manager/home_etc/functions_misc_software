@@ -51,3 +51,12 @@ setup_dnsexit() {
   #update DNS
   ~/bin/dnsexit.sh
 }
+
+
+##################################################
+#Mosh
+#https://mosh.org
+install_mosh() {
+  echo "Open 60000-61000 UDP inbound for mosh to work"
+  sudo apt install mosh
+}
