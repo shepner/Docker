@@ -30,8 +30,10 @@ unzip -jo $GITHUBARCHIVE Docker-master/Manager/home_etc/functions_docker -d ~/et
 chmod 644 ~/etc/functions_docker
 . ~/etc/functions_docker
 
-unzip -jo $GITHUBARCHIVE Docker-master/Manager/home_bin/dm-create.sh -d ~/bin
-chmod 644 ~/bin/dm-create.sh
+unzip -jo $GITHUBARCHIVE Docker-master/Manager/home_bin/dm-* -d ~/bin
+unzip -jo $GITHUBARCHIVE Docker-master/Manager/home_bin/dc-* -d ~/bin
+chmod 644 ~/bin/dm-*.sh
+chmod 644 ~/bin/dc-*.sh
 
 unzip -jo $GITHUBARCHIVE Docker-master/Manager/docker/* -d ~/docker
 
