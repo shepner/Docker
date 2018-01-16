@@ -8,20 +8,25 @@ Steps:
 ```Shell
 wget https://raw.githubusercontent.com/shepner/Docker/master/Manager/github-update.sh
 ```
+3.  Download the OpenVPN client config/keys locally and scp them to the client
+```Shell
+scp ./vpn-udp-1195-config.zip ubuntu@<host>
+```
+4.  [test VPN connectivity](https://openvpn.net/index.php/open-source/documentation/howto.html#start)
+5.  copy the ssh key and set permissions
+```Shell
+scp -i .ssh/aws.pem .ssh/dockerengine_rsa ubuntu@<host>:.ssh/
+scp -i .ssh/aws.pem .ssh/dockerengine_rsa.pub ubuntu@<host>:.ssh/
+ssh -i .ssh/aws.pem ubuntu@<host> chmod 600 .ssh/dockerengine_rsa*
+```
+
+
+---
+---
+
 3. Install [docker-machine](https://docs.docker.com/machine/install-machine/#installing-machine-directly) and OpenVPN
 ```Shell
 ./Docker-DockerMachineHost/setup.sh
-```
-4.  Download the OpenVPN client config/keys locally and scp them to the client
-```Shell
-scp ./vpn-udp-1195-config.zip ubuntu@<hostname>
-```
-5.  [test VPN connectivity](https://openvpn.net/index.php/open-source/documentation/howto.html#start)
-6.  copy the ssh key and set permissions
-```Shell
-scp -i .ssh/aws.pem .ssh/dockerengine_rsa ubuntu@<ipaddress>:.ssh/
-scp -i .ssh/aws.pem .ssh/dockerengine_rsa.pub ubuntu@<ipaddress>:.ssh/
-ssh -i .ssh/aws.pem ubuntu@<ipaddress> chmod 600 .ssh/dockerengine_rsa*
 ```
 
 
