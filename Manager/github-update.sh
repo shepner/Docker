@@ -30,8 +30,13 @@ unzip -jo $GITHUBARCHIVE Docker-master/Manager/home_etc/functions_docker -d ~/et
 chmod 644 ~/etc/functions_docker
 . ~/etc/functions_docker
 
-install_docker_machine
+unzip -jo $GITHUBARCHIVE Docker-master/Manager/home_bin/dm-create.sh -d ~/bin
+chmod 644 ~/bin/dm-create.sh
 
+unzip -jo $GITHUBARCHIVE Docker-master/Manager/docker/* -d ~/docker
+
+install_docker_machine
 #install_docker_engine
 #install_docker_compose
 #configure_docker_swarm
+
