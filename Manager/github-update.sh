@@ -35,6 +35,7 @@ unzip -jo $GITHUBARCHIVE Docker-master/Manager/home_bin/dc-* -d ~/bin
 chmod 644 ~/bin/dm-*.sh
 chmod 644 ~/bin/dc-*.sh
 
+rm -Rf ~/docker
 unzip -jo $GITHUBARCHIVE Docker-master/Manager/docker/* -d ~/docker
 
 install_docker_machine
