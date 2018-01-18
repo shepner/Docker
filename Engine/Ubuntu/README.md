@@ -14,6 +14,7 @@ Disk: 128
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get dist-upgrade
+sudo reboot
 ```
 
 ## [Prepare to install Docker CE](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository)
