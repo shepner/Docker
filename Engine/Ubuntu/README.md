@@ -3,8 +3,18 @@
 
 ## Install Ubuntu Server
 1. download Ubuntu Server 16.04.3
-2. 
-
+2. VMware guest settings:
+CPU: 8
+RAM: 64
+Disk: 128
+3. assign static IP addrs in DHCP server and update DNS
+4. setup ssh keys `ssh-copy-id -i ~/.ssh/<key> <user>@<host>`
+5. update the system
+``` shell
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get dist-upgrade
+```
 
 ## [Prepare to install Docker CE](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository)
 1. Update the apt package index
