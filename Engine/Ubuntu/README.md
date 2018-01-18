@@ -44,13 +44,9 @@ sudo add-apt-repository \
 
 
 ## [Install Docker CE](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-docker-ce-1)
-1. List the available versions
+1. Instll the latest
 ``` shell
-sudo apt-cache madison docker-ce
-```
-2. Instll the latest
-``` shell
-sudo apt-get install docker-ce=<VERSION>
+sudo apt-get install docker-ce
 ```
 3. Test
 ``` shell
