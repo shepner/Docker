@@ -11,8 +11,9 @@ Disk: 128
 4. setup ssh keys `ssh-copy-id -i ~/.ssh/<key> <user>@<host>`
 5. setup generic docker account
 ``` shell
-sudo adduser --home /home/dockerengine --shell /bin/bash --ingroup sudo dockerengine
+sudo adduser --home /home/dockerengine --shell /bin/bash --ingroup sudo --ingroup docker dockerengine
 ```
+dont need `sudo` group?
 6. update the system
 ``` shell
 sudo apt-get update
