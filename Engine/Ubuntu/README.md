@@ -9,7 +9,11 @@ RAM: 64
 Disk: 128
 3. assign static IP addrs in DHCP server and update DNS
 4. setup ssh keys `ssh-copy-id -i ~/.ssh/<key> <user>@<host>`
-5. update the system
+5. setup generic docker account
+``` shell
+sudo adduser --home /home/dockerengine --shell /bin/bash --ingroup sudo dockerengine
+```
+6. update the system
 ``` shell
 sudo apt-get update
 sudo apt-get -y upgrade
