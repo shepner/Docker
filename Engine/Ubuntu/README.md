@@ -14,6 +14,11 @@ Disk: 128
 sudo adduser --home /home/dockerengine --shell /bin/bash --ingroup sudo --ingroup docker dockerengine
 ```
 dont need `sudo` group?
+another way:
+``` shell
+sudo groupadd docker
+sudo gpasswd -a dockeruser docker
+```
 
 6. update the system
 ``` shell
