@@ -14,6 +14,7 @@ Disk: 128
 sudo adduser --home /home/dockerengine --shell /bin/bash --ingroup sudo --ingroup docker dockerengine
 ```
 dont need `sudo` group?
+
 6. update the system
 ``` shell
 sudo apt-get update
@@ -21,6 +22,7 @@ sudo apt-get -y upgrade
 sudo apt-get -y dist-upgrade
 sudo reboot
 ```
+
 7. add the name/ip to DNS (docker-machine wont work without this!)
 
 
