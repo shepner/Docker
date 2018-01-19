@@ -12,8 +12,10 @@ Disk: 128
 5. setup generic docker account
 ``` shell
 sudo adduser --home /home/dockerengine --shell /bin/bash --ingroup sudo --ingroup docker dockerengine
+echo 'dockerengine ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 ```
-dont need `sudo` group?
+TODO:  tie this down to specific commands
+
 another way:
 ``` shell
 sudo groupadd docker
