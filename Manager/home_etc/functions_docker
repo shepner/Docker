@@ -54,7 +54,7 @@ install_docker_compose () {
 }
 
 ##################################################
-#Docker Compose
+#Docker Swarm stuff
 configure_docker_swarm () {
   cp /home/ubuntu/Docker-DockerMachineHost/docker-compose.yml /home/ubuntu/
 }
