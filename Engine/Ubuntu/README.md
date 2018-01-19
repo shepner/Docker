@@ -20,6 +20,8 @@ sudo apt-get -y upgrade
 sudo apt-get -y dist-upgrade
 sudo reboot
 ```
+7. add the name/ip to DNS (docker-machine wont work without this!)
+
 
 ## [Prepare to install Docker CE](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository)
 1. Update the apt package index
