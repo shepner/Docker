@@ -12,15 +12,18 @@ Disk: 128
 5. setup generic docker account
 ``` shell
 sudo adduser --home /home/dockerengine --shell /bin/bash --ingroup sudo --ingroup docker dockerengine
-echo 'dockerengine ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 ```
-TODO:  tie this down to specific commands
-
-another way:
+Or after the fact:
 ``` shell
 sudo groupadd docker
 sudo gpasswd -a dockerengine docker
+sudo gpasswd -a dockerengine sudo
 ```
+6. Remove what little bits of pesky security we have for the sevice ID
+``` shell
+echo 'dockerengine ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
+```
+TODO:  tie this down to specific commands to pretend its more secure
 
 6. update the system
 ``` shell
