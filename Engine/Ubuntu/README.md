@@ -19,7 +19,7 @@ TODO:  tie this down to specific commands
 another way:
 ``` shell
 sudo groupadd docker
-sudo gpasswd -a dockeruser docker
+sudo gpasswd -a dockerengine docker
 ```
 
 6. update the system
