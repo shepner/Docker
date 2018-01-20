@@ -110,9 +110,10 @@ docker run -i -t --volume-driver=nfs -v nfshost/path:/mount ubuntu /bin/bash
 ### or better, just use NFS at the host
 ``` shell
 sudo apt-get install -y nfs-common
-sudo echo "hostname:/dockermountpoint /mnt/nasname/docker nfs rw 0 0" >> /etc/fstab
-mkdir -p /mnt/nasname/docker
+echo "nasname:/dockermountpoint /mnt/nasname/docker nfs rw 0 0" | sudo tee --append /etc/fstab
+sudo mkdir -p /mnt/nasname/docker
 sudo mount -a
+sudo chown dockerengine:docker /mnt/nasname/docker
 ```
 
 
