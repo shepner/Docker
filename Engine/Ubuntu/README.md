@@ -65,9 +65,10 @@ sudo add-apt-repository \
 ## [Install Docker CE](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-docker-ce-1)
 1. Instll the latest
 ``` shell
+sudo apt-get update
 sudo apt-get install docker-ce
 ```
-3. Test
+2. Test
 ``` shell
 sudo docker run hello-world
 ```
