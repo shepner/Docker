@@ -1,7 +1,65 @@
+
+#########################
+# Sources:
+# https://hub.docker.com/r/supercoder/docker-handbrake-cli
+##########################
+
+FROM phusion/passenger-customizable:0.9.10
+MAINTAINER Jon Gillies <supercoder@gmail.com>
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV TRANSMISSION_VERSION 2.84
+ENV LIBEVENT_VERSION 2.0.18
+ENV LANG en_US.UTF-8
+ENV LC_ALL C.UTF-8
+ENV LANGUAGE en_US.UTF-8
+
+VOLUME '/input'
+VOLUME '/output'
+
+ENV VERSION 0.10.1ppa1~trusty1
+
+RUN echo 'deb http://ppa.launchpad.net/stebbins/handbrake-releases/ubuntu trusty main' > /etc/apt/sources.list.d/handbrake.list \
+&& apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 816950D8 \
+&& apt-get update \
+&& apt-cache policy handbrake-cli \
+&& apt-get -y install \
+handbrake-cli=${VERSION}
+
+CMD ["-h"]
+ENTRYPOINT ["HandBrakeCLI"]
+
+
+#########################
+# Sources:
+# https://hub.docker.com/r/robshad/handbrake-cli/dockerfile/
+##########################
+
+FROM linuxserver/baseimage
+MAINTAINER Rob Shad <robertmshad@googlemail.com>
+ENV APTLIST="handbrake-cli ffmpeg wget"
+
+RUN add-apt-repository ppa:stebbins/handbrake-snapshots && \
+add-apt-repository ppa:kirillshkrogalev/ffmpeg-next
+
+RUN apt-get update -q && \
+apt-get install $APTLIST -qy && \
+apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+
+ADD init/ /etc/my_init.d/
+ADD scripts/ /scripts/
+RUN chmod -v +x /etc/service/*/run && \
+chmod -v +x /etc/my_init.d/*.sh
+
+# Volumes and Ports
+VOLUME ["/input", "/output", "/config"]
+
+#########################
 # Sources:
 # https://hub.docker.com/r/ecliptik/handbrake/dockerfile
 # https://github.com/HandBrake/HandBrake/pull/1090
-#
+##########################
+
 # Build handbrake image
 # docker build -t handbrake .
 
