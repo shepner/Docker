@@ -1,0 +1,10 @@
+##################################################
+#make future updates easier
+#usage:  install_update_script master.zip
+
+install_update_script() {
+  echo Installing github-update.sh
+  
+  unzip -joq $1 Docker-master/Manager/github-update.sh -d ~
+  chmod 700 ~/github-update.sh
+}
