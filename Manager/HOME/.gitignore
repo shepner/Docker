@@ -1,0 +1,11 @@
+# ignore all by default
+/*
+
+# explicitly add stuff back in
+!/README.md
+!/.gitignore
+!/.profile
+!/github-update.sh
+!/bin
+!/etc
+!/docker
