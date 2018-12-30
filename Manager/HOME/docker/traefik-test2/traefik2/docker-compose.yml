@@ -1,0 +1,38 @@
+version: "2"
+services:
+
+  traefik:
+    image: traefik
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - $PWD/traefik.toml:/etc/traefik/traefik.toml
+      - $PWD/run/acme:/etc/traefik/acme
+    labels:
+      - "traefik.backend=proxy"
+
+  website:
+    image: example/website
+    environment:
+      - GA_WEBSITE
+    labels:
+      - "traefik.backend=website"
+      - "traefik.frontend.rule=Host:example.uk, www.example.uk, example.co.uk, www.example.co.uk"
+
+  blog:
+    image: example/blog
+    environment:
+      - GA_BLOG
+    labels:
+      - "traefik.backend=blog"
+      - "traefik.frontend.rule=Host: blog.example.org.uk, www.blog.example.org.uk"
+      - "traefik.frontend.rule=Host: example.com, www.example.com"
+
+  holdingPage:
+    image: example/holding-page
+    labels:
+      - "traefik.backend=holding"
+      - "traefik.frontend.rule=Host:example.org.uk, www.example.org.uk"
