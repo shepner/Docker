@@ -13,14 +13,14 @@ sudo docker-machine ls
 
 #make this machine a swarm manager
 sudo docker swarm init
-#run `sudo docker swarm join-token manager` to add another manager
+#run `sudo docker swarm join-token manager` to get the token again or to add another manager
 #see also:  https://docs.docker.com/engine/swarm/swarm_manager_locking/
 
 #add workers
 #NOTE:  the `docker swarm init` string is what you will be using but make sure the IP address is one the workers can talk to
-docker-machine ssh de01a "docker swarm join --token SWMTKN-1-44vwsiqo9q5iidyw7enax6fw2r0v4lx3e16u881dazjiakou7m-6ida9nizj49u2gtwbt2e71h83 10.1.3.18:2377"
-docker-machine ssh de02a "docker swarm join --token SWMTKN-1-44vwsiqo9q5iidyw7enax6fw2r0v4lx3e16u881dazjiakou7m-6ida9nizj49u2gtwbt2e71h83 10.1.3.18:2377"
-docker-machine ssh de03a "docker swarm join --token SWMTKN-1-44vwsiqo9q5iidyw7enax6fw2r0v4lx3e16u881dazjiakou7m-6ida9nizj49u2gtwbt2e71h83 10.1.3.18:2377"
+docker-machine ssh de01a "docker swarm join --token SWMTKN-1-4[...]1h83 10.1.3.18:2377"
+docker-machine ssh de02a "docker swarm join --token SWMTKN-1-4[...]1h83 10.1.3.18:2377"
+docker-machine ssh de03a "docker swarm join --token SWMTKN-1-4[...]1h83 10.1.3.18:2377"
 
 #show the cluster
 sudo docker node ls
