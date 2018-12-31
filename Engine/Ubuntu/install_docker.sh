@@ -7,7 +7,7 @@
 sudo apt-get update
 
 # Install packages to allow apt to use a repository over HTTPS
-sudo apt-get install \
+sudo apt-get install -y \
   apt-transport-https \
   ca-certificates \
   curl \
@@ -26,4 +26,4 @@ sudo add-apt-repository \
 # Install Docker CE
 # https://docs.docker.com/install/linux/docker-ce/ubuntu
 sudo apt-get update
-sudo apt-get install docker-ce
+sudo apt-get install -y docker-ce
