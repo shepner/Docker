@@ -54,7 +54,7 @@ sudo mount -a
 
 ### Install Docker software
 
-docker
+[Docker CE for Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 ``` shell
 bash <(curl -s https://raw.githubusercontent.com/shepner/Docker/master/Engine/Ubuntu/install_docker.sh)
 ```
