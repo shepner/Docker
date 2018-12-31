@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Prepare to install Docker CE
+# https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository
+
 # Update the apt package index
 sudo apt-get update
 
@@ -18,3 +21,8 @@ sudo add-apt-repository \
   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) \
   stable"
+
+
+# Install Docker CE
+# https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-docker-ce-1
+sudo apt-get install docker-ce
