@@ -16,8 +16,8 @@ sudo docker service create \
   -e AGENT_CLUSTER_ADDR=tasks.portainer_agent \
   --mode global \
   --constraint 'node.platform.os == linux' \
-  --mount type=bind,src=//var/run/docker.sock,dst=/var/run/docker.sock \
-  --mount type=bind,src=//var/lib/docker/volumes,dst=/var/lib/docker/volumes \
+  --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
+  --mount type=bind,src=/var/lib/docker/volumes,dst=/var/lib/docker/volumes \
   portainer/agent
 
 # Portainer Server as a Docker Swarm service
@@ -39,4 +39,7 @@ sudo docker service create \
 
 # now goto "http://<node IP address>:9000" and login
 
+# if you need to bounce the service
+#sudo docker service scale portainer=0
+#sudo docker service scale portainer=1
 
