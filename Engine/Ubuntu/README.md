@@ -17,17 +17,16 @@
 2. setup generic docker account
 ``` shell
 sudo groupadd docker --gid 1100
-sudo adduser --home /home/dockerengine --uid 1003 --gid 1100 --shell /bin/bash --ingroup sudo --ingroup docker dockerengine
-sudo gpasswd -a dockerengine docker
-sudo gpasswd -a dockerengine sudo
+sudo adduser --home /home/docker --uid 1003 --gid 1100 --shell /bin/bash docker
+
+sudo gpasswd -a docker docker
+sudo gpasswd -a docker sudo
 ```
 3. Remove what little bits of pesky security we have for the sevice ID
 ``` shell
 echo 'dockerengine ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 ```
 (dont forget to actually run that or you will get `sudo: no tty present and no askpass program specified`)
-
-TODO:  tie this down to specific commands to pretend its more secure
 
 4. update the system
 ``` shell
