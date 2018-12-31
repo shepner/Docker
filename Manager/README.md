@@ -63,7 +63,7 @@ echo "nas:/data1/docker /mnt/nas/docker nfs rw 0 0" | sudo tee --append /etc/fst
 
 sudo mount -a
 
-#sudo chown -R dockerengine:docker /mnt/nas/docker
+#sudo chown -R docker:docker /mnt/nas/docker
 ```
 
 ### Install Docker software
