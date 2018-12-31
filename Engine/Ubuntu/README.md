@@ -30,6 +30,8 @@ sudo gpasswd -a dockerengine sudo
 ``` shell
 echo 'dockerengine ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 ```
+(dont forget to actually run that or you will get `sudo: no tty present and no askpass program specified`)
+
 TODO:  tie this down to specific commands to pretend its more secure
 
 4. update the system
