@@ -34,6 +34,20 @@ sudo gpasswd -a docker sudo
 ``` shell
 echo 'dockerengine ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 ```
+4. copy the ssh keys
+``` shell
+nodes[0]="dm01"
+nodes[1]="dm02"
+nodes[3]="dm03"
+for DHOST in ${nodes[@]} ; do
+  ssh-copy-id -i ~/.ssh/<key> docker@$DHOST
+  ssh docker@$DHOST "mkdir -p .ssh"
+  scp ~/.ssh/docker_rsa docker@$DHOST:.ssh/docker_rsa
+  scp ~/.ssh/docker_rsa.pub docker@$DHOST:.ssh/docker_rsa.pub
+  ssh docker@$DHOST "chmod -R 700 ~/.ssh"
+done
+```
+
 
 ### patch the system
 ``` shell
