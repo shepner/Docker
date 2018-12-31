@@ -2,76 +2,49 @@
 
 
 ## Install Ubuntu Server
-1. download Ubuntu Server 16.04.3
+1. download Ubuntu Server 18.04.1
 2. VMware guest settings:
-CPU: 8
-RAM: 64
-Disk: 128
-3. assign static IP addrs in DHCP server and update DNS
-4. setup ssh keys `ssh-copy-id -i ~/.ssh/<key> <user>@<host>`
-5. setup generic docker account
-``` shell
-sudo adduser --home /home/dockerengine --shell /bin/bash --ingroup sudo --ingroup docker dockerengine
-```
-Or after the fact:
+
+   CPU: 8
+   
+   RAM: 64
+   
+   Disk: 128
+   
+3. assign static IP addrs in DHCP
+4. add the name/ip to DNS (docker-machine wont work without this!)
+5. setup ssh keys: `ssh-copy-id -i ~/.ssh/<key> <user>@<host>`
+
+## setup Docker
+1. login to server: `ssh <user>@<host>`
+2. setup generic docker account
 ``` shell
 sudo groupadd docker
+sudo adduser --home /home/dockerengine --shell /bin/bash --ingroup sudo --ingroup docker dockerengine
 sudo gpasswd -a dockerengine docker
 sudo gpasswd -a dockerengine sudo
 ```
-6. Remove what little bits of pesky security we have for the sevice ID
+3. Remove what little bits of pesky security we have for the sevice ID
 ``` shell
 echo 'dockerengine ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 ```
 TODO:  tie this down to specific commands to pretend its more secure
 
-6. update the system
+4. update the system
 ``` shell
-sudo apt-get update
-sudo apt-get -y upgrade
-sudo apt-get -y dist-upgrade
+bash <(curl -s https://raw.githubusercontent.com/shepner/Docker/master/Engine/Ubuntu/update_ubuntu.sh)
+```
+
+## Install Docker CE
+``` shell
+bash <(curl -s https://raw.githubusercontent.com/shepner/Docker/master/Engine/Ubuntu/install_docker.sh)
 sudo reboot
 ```
 
-7. add the name/ip to DNS (docker-machine wont work without this!)
+---
 
+Not sure if I want to use this
 
-## [Prepare to install Docker CE](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository)
-1. Update the apt package index
-``` shell
-sudo apt-get update
-```
-2. Install packages to allow apt to use a repository over HTTPS:
-``` shell
-sudo apt-get install \
-     apt-transport-https \
-     ca-certificates \
-     curl \
-     software-properties-common
-```
-3. Add Docker’s official GPG key:
-``` shell
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-```
-4. set up the stable repository
-``` shell
-sudo add-apt-repository \
-     "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-     $(lsb_release -cs) \
-     stable"
-```
-
-
-## [Install Docker CE](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-docker-ce-1)
-1. Instll the latest
-``` shell
-sudo apt-get update
-sudo apt-get install docker-ce
-```
-2. Test
-``` shell
-sudo docker run hello-world
-```
 
 ## Netshare
 ### Install Netshare
