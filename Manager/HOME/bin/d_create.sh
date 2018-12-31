@@ -3,10 +3,6 @@
 # DONT GO BLINDLY RUNNING THIS!
 #####################################
 
-#this page has some good stuff for rewriting this into something better:
-#https://codefresh.io/blog/deploy-docker-compose-v3-swarm-mode-cluster/
-
-
 #FIX DNS FIRST OR USE IP ADDRESSES INSTEAD!
 
 nodes[0]="de01a"
