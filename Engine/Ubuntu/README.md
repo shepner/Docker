@@ -19,11 +19,9 @@
 1. login to server: `ssh <user>@<host>`
 2. setup generic docker account
 ``` shell
-sudo groupadd docker
-sudo groupadd dockerengine
-sudo adduser --home /home/dockerengine --shell /bin/bash --ingroup sudo --ingroup docker dockerengine
+sudo groupadd docker --gid 1100
+sudo adduser --home /home/dockerengine --uid 1003 --gid 1100 --shell /bin/bash --ingroup sudo --ingroup docker dockerengine
 sudo gpasswd -a dockerengine docker
-sudo gpasswd -a dockerengine dockerengine
 sudo gpasswd -a dockerengine sudo
 ```
 3. Remove what little bits of pesky security we have for the sevice ID
@@ -42,13 +40,33 @@ bash <(curl -s https://raw.githubusercontent.com/shepner/Docker/master/Engine/Ub
 ## Install Docker CE
 ``` shell
 bash <(curl -s https://raw.githubusercontent.com/shepner/Docker/master/Engine/Ubuntu/install_docker.sh)
+```
+
+## setup NFS
+``` shell
+sudo apt-get install -y nfs-common
+
+sudo mkdir -p /mnt/nas/docker
+echo "nas:/data1/docker /mnt/nas/docker nfs rw 0 0" | sudo tee --append /etc/fstab
+
+sudo mkdir -p /mnt/nas/media
+echo "nas:/data1/media /mnt/nas/media nfs rw 0 0" | sudo tee --append /etc/fstab
+
+sudo mount -a
+
+#sudo chown -R dockerengine:docker /mnt/nas/docker
+```
+
+``` Shell
 sudo reboot
 ```
 
+
 ---
 
-Not sure if I want to use this
+## Review this stuff below
 
+---
 
 ## Netshare
 ### Install Netshare
@@ -94,6 +112,7 @@ sudo mount -a
 sudo chown dockerengine:docker /mnt/nasname/docker
 ```
 
+---
 
 ---
 
