@@ -66,6 +66,13 @@ base=https://github.com/docker/machine/releases/download/v0.16.0 &&
   sudo install /tmp/docker-machine /usr/local/bin/docker-machine
 ```
 
+[docker compose](https://docs.docker.com/compose/install/)
+``` shell
+sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+```
+
 ### Finish
 ``` Shell
 sudo reboot
