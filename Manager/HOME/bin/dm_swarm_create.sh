@@ -35,11 +35,12 @@ done
 sudo docker node ls
 
 ########
+exit  # dont run anything after this point
 
 # do this to fix a broken node
-#NODE=de03a
-#TOKEN=`sudo docker swarm join-token -q worker`
-#docker-machine ssh $NODE "docker swarm leave"
-#docker-machine ssh $NODE "docker swarm join --token $TOKEN 10.1.3.18:2377"
-
+TOKEN=`sudo docker swarm join-token -q worker`
+for DE in ${nodes[@]} ; do
+  docker-machine ssh $DE "docker swarm leave"
+  docker-machine ssh $DE "docker swarm join --token $TOKEN $MANAGERIP:2377"
+done
 
