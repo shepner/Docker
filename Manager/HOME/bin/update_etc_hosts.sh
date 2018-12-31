@@ -8,3 +8,4 @@ cat >> /etc/hosts << EOF
 10.0.0.75 de02b
 10.0.0.76 de03b
 EOF
+
