@@ -4,12 +4,9 @@
 ## Install Ubuntu Server
 1. download Ubuntu Server 18.04.1
 2. VMware guest settings:
-
-   CPU: 8
-   
-   RAM: 64
-   
-   Disk: 128
+  * CPU: 8
+  * RAM: 64
+  * Disk: 128
    
 3. assign static IP addrs in DHCP
 4. add the name/ip to DNS (docker-machine wont work without this!)
