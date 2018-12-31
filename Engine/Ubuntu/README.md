@@ -20,8 +20,10 @@
 2. setup generic docker account
 ``` shell
 sudo groupadd docker
+sudo groupadd dockerengine
 sudo adduser --home /home/dockerengine --shell /bin/bash --ingroup sudo --ingroup docker dockerengine
 sudo gpasswd -a dockerengine docker
+sudo gpasswd -a dockerengine dockerengine
 sudo gpasswd -a dockerengine sudo
 ```
 3. Remove what little bits of pesky security we have for the sevice ID
