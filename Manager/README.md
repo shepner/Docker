@@ -34,7 +34,7 @@ sudo gpasswd -a docker sudo
 ``` shell
 echo 'dockerengine ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 ```
-4. copy the ssh keys
+4. copy the ssh keys to docker managers
 ``` shell
 nodes[0]="dm01"
 nodes[1]="dm02"
