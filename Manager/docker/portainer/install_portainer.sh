@@ -20,36 +20,23 @@ sudo docker service create \
   --mount type=bind,src=//var/lib/docker/volumes,dst=/var/lib/docker/volumes \
   portainer/agent
 
-
-# Install Portainer Server
-# https://portainer.readthedocs.io/en/stable/deployment.html
-# Deploy Portainer Server on a standalone LINUX Docker host/single node swarm cluster
-#sudo docker volume create portainer_data
-#sudo docker run -d -p 9000:9000 \
-#  --name portainer \
-#  --restart always \
-#  -v /var/run/docker.sock:/var/run/docker.sock \
-#  -v /home/ubuntu/portainer:/data portainer/portainer
-
 # Portainer Server as a Docker Swarm service
-# There needs to be a way to sync the data directories across all nodes
+# NOTE:  There needs to be a way to sync the data directories across all nodes
 
-#setup the data dir
-#sudo mkdir -p /docker/portainer
-#docker-machine ssh de01a "sudo mkdir -p /docker/portainer"
-#docker-machine ssh de02a "sudo mkdir -p /docker/portainer"
-#docker-machine ssh de03a "sudo mkdir -p /docker/portainer"
+# setup the data dir
+sudo mkdir -p /mnt/nas/docker/portainer
 
-#deploy the service
+# deploy the service
+# https://docs.docker.com/engine/reference/commandline/service_create/
 sudo docker service create \
     --name portainer \
     --network portainer_agent_network \
     --publish 9000:9000 \
     --replicas=1 \
     --constraint 'node.role == manager' \
+    --mount type=bind,src=/mnt/nas/docker/portainer,dst=/data \
     portainer/portainer -H "tcp://tasks.portainer_agent:9001" --tlsskipverify
-#  --mount type=bind,src=/docker/portainer,dst=/data \
 
-#now goto "http://<node IP address>:9000" and login
+# now goto "http://<node IP address>:9000" and login
 
 
