@@ -32,7 +32,7 @@ sudo gpasswd -a docker sudo
 ```
 3. Remove what little bits of pesky security we have for the sevice ID
 ``` shell
-echo 'dockerengine ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
+echo 'docker ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 ```
 4. copy the ssh keys to docker managers
 ``` shell
