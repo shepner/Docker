@@ -1,4 +1,82 @@
-# Docker-DockerMachineHost
+# Docker Manager
+
+Follow the instructions below as appropriate. Everything is using Ubuntu
+
+## AWS instructions
+
+<placeholder>
+
+## Local Ubuntu instructions
+
+### Install Ubuntu Server
+1. download Ubuntu Server 18.04.1
+2. VMware guest settings:
+   * CPU: 2
+   * RAM: 64
+   * Disk: 128
+3. add the name/ip to DNS (docker-machine wont work without this!)
+4. assign static IP addrs in DHCP
+5. setup ssh keys: `ssh-copy-id -i ~/.ssh/<key> <user>@<host>`
+
+## Instructions for all managers
+
+At this point all managers should be at the same point regardless of where they reside
+
+### setup the Docker service account
+1. login to server: `ssh <user>@<host>`
+2. setup generic docker account
+``` shell
+sudo groupadd docker --gid 1100
+sudo adduser --home /home/docker --uid 1003 --gid 1100 --shell /bin/bash docker
+sudo gpasswd -a docker sudo
+```
+3. Remove what little bits of pesky security we have for the sevice ID
+``` shell
+echo 'dockerengine ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
+```
+
+### patch the system
+``` shell
+bash <(curl -s https://raw.githubusercontent.com/shepner/Docker/master/Manager/HOME/bin/update_ubuntu.sh)
+```
+
+### setup NFS
+``` shell
+sudo apt-get install -y nfs-common
+
+sudo mkdir -p /mnt/nas/docker
+echo "nas:/data1/docker /mnt/nas/docker nfs rw 0 0" | sudo tee --append /etc/fstab
+
+sudo mount -a
+
+#sudo chown -R dockerengine:docker /mnt/nas/docker
+```
+
+### Install Docker software
+
+docker
+``` shell
+bash <(curl -s https://raw.githubusercontent.com/shepner/Docker/master/Engine/Ubuntu/install_docker.sh)
+```
+
+[docker machine](https://docs.docker.com/machine/install-machine/#install-machine-directly)
+``` shell
+base=https://github.com/docker/machine/releases/download/v0.16.0 &&
+  curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
+  sudo install /tmp/docker-machine /usr/local/bin/docker-machine
+```
+
+### Finish
+``` Shell
+sudo reboot
+```
+
+
+---
+
+
+
+## AWS
 
 Notes for building a host on [Amazon AWS EC2](https://console.aws.amazon.com/ec2/v2) to run [Docker Machine](https://docs.docker.com/machine/).  It will need to act as an [OpenVPN](https://openvpn.net) client in order connect to the Docker Engines that sit behind NAT.
 
