@@ -19,3 +19,4 @@ for DE in ${nodes[@]} ; do
   #create the docker engines
   docker-machine create --driver generic --generic-ssh-key ~/.ssh/dockerengine_rsa --generic-ssh-user=dockerengine --generic-ip-address=$DE $DE
 done
+
