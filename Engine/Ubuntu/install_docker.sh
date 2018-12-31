@@ -24,5 +24,6 @@ sudo add-apt-repository \
 
 
 # Install Docker CE
-# https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-docker-ce-1
+# https://docs.docker.com/install/linux/docker-ce/ubuntu
+sudo apt-get update
 sudo apt-get install docker-ce
