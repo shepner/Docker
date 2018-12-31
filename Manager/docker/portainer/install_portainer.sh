@@ -7,6 +7,7 @@
 # https://portainer.readthedocs.io/en/stable/agent.html
 
 # setup the agent network
+# https://docs.docker.com/engine/reference/commandline/network_create/
 sudo docker network create --driver overlay --attachable portainer_agent_network
 
 # create the agent service
