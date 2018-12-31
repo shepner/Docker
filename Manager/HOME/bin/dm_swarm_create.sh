@@ -3,35 +3,49 @@
 # DONT GO BLINDLY RUNNING THIS!
 #####################################
 
-nodes[0]="de01a"
-nodes[1]="de01b"
-nodes[2]="de02a"
-nodes[3]="de02b"
-nodes[4]="de03a"
-nodes[5]="de03b"
-
-MANAGERIP="10.1.3.18"
+nodes[0]="de01"
+nodes[1]="de02"
+nodes[2]="de03"
+nodes[3]="de04"
+nodes[4]="de05"
+nodes[5]="de06"
 
 #show what is available
 docker-machine ls
 
-#make this machine a swarm manager
-sudo docker swarm init --advertise-addr $MANAGERIP
-
-# to add another manager
-# https://docs.docker.com/engine/swarm/admin_guide/#add-manager-nodes-for-fault-tolerance
+####################################
+# RUN THESE COMMANDS ON EACH MANAGER
+####################################
+# https://docs.docker.com/engine/swarm/admin_guide/
 # https://docs.docker.com/engine/swarm/swarm_manager_locking/
-#sudo docker swarm join-token manager
+
+# dm01
+MANAGERIP=10.1.3.18
+#sudo docker swarm init --advertise-addr $MANAGERIP  
+#docker node update --availability drain dm01
+
+# add the other managers
+#TOKEN=`sudo docker swarm join-token -q manager`
+
+# dm02
+#sudo docker swarm join --token $TOKEN $MANAGERIP:2377
+#docker node update --availability drain dm02
+
+# dm03
+#sudo docker swarm join --token $TOKEN $MANAGERIP:2377
+#docker node update --availability drain dm03
+
+####################################
 
 # fetch the swarm worker token
 TOKEN=`sudo docker swarm join-token -q worker`
 
+# add workers
 for DE in ${nodes[@]} ; do
-  # add workers
-  docker-machine ssh de01a "docker swarm join --token $TOKEN $MANAGERIP:2377"done
+  docker-machine ssh $DE "docker swarm join --token $TOKEN $MANAGERIP:2377"
 done
 
-#show the cluster
+#show the swarm nodes
 sudo docker node ls
 
 ########
