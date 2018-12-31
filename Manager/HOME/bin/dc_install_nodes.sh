@@ -13,11 +13,16 @@ nodes[5]="de03b"
 #show what is available
 docker-machine ls
 
+#setup the ssh keys
 for DE in ${nodes[@]} ; do
-  #setup the ssh keys
   ssh-copy-id -i ~/.ssh/dockerengine_rsa dockerengine@$DE
-  
-  #create the docker engines
+done
+
+#create the docker engines
+for DE in ${nodes[@]} ; do
   docker-machine create --driver generic --generic-ssh-key ~/.ssh/dockerengine_rsa --generic-ssh-user=dockerengine --generic-ip-address=$DE $DE
 done
+
+#show what is available
+docker-machine ls
 
