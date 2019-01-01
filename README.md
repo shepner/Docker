@@ -17,7 +17,7 @@ Setup a (simple?) redundant Docker swarm in a hybrid cloud config
 ## core apps
 
 1. [portainer](https://github.com/shepner/Docker/blob/master/Manager/docker/portainer/install_portainer.sh): container management
-2. [dnsmasq](https://github.com/shepner/Docker/tree/master/Manager/docker/DNSmasq): DNS
+2. [dnsmasq](https://github.com/shepner/Docker/tree/master/Manager/docker/dnsmasq): DNS
 
 ## additional apps
 
