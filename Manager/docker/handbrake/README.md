@@ -2,6 +2,7 @@
 
 https://hub.docker.com/r/jlesage/handbrake
 
+``` shell
 mkdir -p /mnt/nas/docker/handbrake
 
 sudo docker service create \
@@ -12,4 +13,5 @@ sudo docker service create \
   --mount type=bind,src=/mnt/nas/media/jobs/storage,dst=/storage:ro \
   --replicas=1 \
   jlesage/handbrake
+```
 
