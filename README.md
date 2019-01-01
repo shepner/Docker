@@ -13,7 +13,15 @@ Setup a (simple?) redundant Docker swarm in a hybrid cloud config
 
 3. [setup the nodes](https://github.com/shepner/Docker/blob/master/Manager/HOME/bin/dc_install_nodes.sh)
 4. On dm01, [setup the swarm](https://github.com/shepner/Docker/blob/master/Manager/HOME/bin/dm_swarm_create.sh)
-5. [install portainer](https://github.com/shepner/Docker/blob/master/Manager/docker/portainer/install_portainer.sh)
+
+## core apps
+
+1. [portainer](https://github.com/shepner/Docker/blob/master/Manager/docker/portainer/install_portainer.sh): container management
+2. [dnsmasq](https://github.com/shepner/Docker/tree/master/Manager/docker/DNSmasq): DNS
+
+## additional apps
+
+* [traefik](https://github.com/shepner/Docker/tree/master/Manager/docker/traefik) reverse web proxy
 
 
 --------
