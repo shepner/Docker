@@ -10,6 +10,7 @@ DNSmasq documentation:
 
 [Docker Service Create](https://docs.docker.com/engine/reference/commandline/service_create/) documentation
 
+https://hub.docker.com/r/jpillora/dnsmasq
 
 Set this to run on the managers rather then the nodes
 ``` shell
