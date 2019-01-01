@@ -22,7 +22,7 @@ Setup a (simple?) redundant Docker swarm in a hybrid cloud config
 ## additional apps
 
 * [traefik](https://github.com/shepner/Docker/tree/master/Manager/docker/traefik) reverse web proxy
-
+* [handbrake](https://github.com/shepner/Docker/tree/master/Manager/docker/handbrake)
 
 --------
 
