@@ -8,15 +8,12 @@ http://oss.segetech.com/intra/srv/dnsmasq.conf
 
 
 https://docs.docker.com/engine/reference/commandline/service_create/
-https://docs.docker.com/config/containers/container-networking/
-
-example of how to setup as a service listening on a single ip address named 'ns01'
 
 ``` shell
 sudo docker service create \
   --name DNSmasq \
-  --host ns01:10.0.0.12 \
-  --publish 53:53/udp \
+  --publish published=53,target=53,protocol=udp,mode=ingress \
+  --publish published=8080,target=8080,protocol=tcp,mode=ingress \
   --replicas=1 \
   shepner/dnsmasq:latest
 ```
