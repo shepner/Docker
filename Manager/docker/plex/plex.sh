@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Look at this to use with plex plugins
+# https://github.com/linuxserver/docker-plex
+
+
 # https://forums.plex.tv/t/official-plex-media-server-docker-images-getting-started/172291
 # https://github.com/plexinc/pms-docker
 
