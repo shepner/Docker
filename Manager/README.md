@@ -14,11 +14,10 @@ Follow the instructions below as appropriate. Everything is using Ubuntu
    * CPU: 2
    * RAM: 64
    * Disk: 128
-   
 3. Docker settings:
-  * assign static IP address.  Note we arent going to use DNS/DHCP because those services may be hosted in docker.
-  * DNS servers:  208.67.222.222, 208.67.220.220
-  * User ID:  docker
+   * assign static IP address.  Note we arent going to use DNS/DHCP because those services may be hosted in docker.
+   * DNS servers:  208.67.222.222, 208.67.220.220
+   * User ID:  docker
 4. setup ssh keys:
 ``` shell
 DHOST=<host IP>
