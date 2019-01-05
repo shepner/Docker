@@ -17,6 +17,10 @@ Follow the instructions below as appropriate. Everything is using Ubuntu
 3. add the name/ip to DNS (docker-machine wont work without this!)
 4. assign static IP addrs in DHCP
 5. setup ssh keys: `ssh-copy-id -i ~/.ssh/<key> <user>@<host>`
+6. uninstall unwanted software
+``` shell
+sudo apt-get remove -qy dnsmasq-base
+```
 
 ## Instructions for all managers
 
