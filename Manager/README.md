@@ -14,41 +14,57 @@ Follow the instructions below as appropriate. Everything is using Ubuntu
    * CPU: 2
    * RAM: 64
    * Disk: 128
-3. add the name/ip to DNS (docker-machine wont work without this!)
-4. assign static IP addrs in DHCP
-5. setup ssh keys: `ssh-copy-id -i ~/.ssh/<key> <user>@<host>`
-6. ssh to the host and [disable the local dns listener](https://mmoapi.com/post/how-to-disable-dnsmasq-port-53-listening-on-ubuntu-18-04) (might require a reboot)
+3. Docker settings:
+  * assign static IP address.  Note we arent going to use DNS/DHCP because those services may be hosted in docker.
+  * DNS servers:  208.67.222.222, 208.67.220.220
+  * User ID:  docker
+4. setup ssh keys:
 ``` shell
-netstat -tulnp | grep 53
+DHOST=<host IP>
+ssh-copy-id -i ~/.ssh/docker_rsa docker@$DHOST
 
-echo "DNSStubListener=no" | sudo tee --append /etc/systemd/resolved.conf
+scp -i ~/.ssh/docker_rsa ~/.ssh/docker_rsa.pub docker@$DHOST:.ssh/docker_rsa.pub
+ssh -i ~/.ssh/docker_rsa docker@$DHOST "chmod -R 700 ~/.ssh"
+```
+   This might also be a good point to update `~/.ssh/config` so specifying the user ID and identity file is not needed
+
+5. ssh to the host `ssh docker@host>` and [disable the local dns listener](https://mmoapi.com/post/how-to-disable-dnsmasq-port-53-listening-on-ubuntu-18-04) (might require a reboot)
+``` shell
+#sudo netstat -tulnp | grep 53
+echo 'DNSStubListener=no' | sudo tee --append /etc/systemd/resolved.conf
 sudo systemctl daemon-reload
 sudo systemctl restart systemd-resolved.service
+#sudo netstat -tulnp | grep 53
 
-netstat -tulnp | grep 53
+sudo rm /etc/resolv.conf
+sudo sh -c 'cat > /etc/resolv.conf << EOF
+nameserver 208.67.222.222
+nameserver 208.67.220.220
+EOF'
 ```
+   dont worry too much about the "sudo: unable to resolve host <hostname>: Resource temporarily unavailable" error.  This is fixed by placing the hostname in `/etc/hosts` which we will do later.
 
 ## Instructions for all managers
 
 At this point all managers should be at the same point regardless of where they reside
 
 ### setup the Docker service account
-1. login to server: `ssh <user>@<host>`
-2. update the hostfile
+1. login to server: `ssh docker@<host>`
+2. Remove what little bits of pesky security we have for the sevice ID
+``` shell
+echo 'docker ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
+```
+3. update the hostfile
 ``` shell
 bash <(curl -s https://raw.githubusercontent.com/shepner/Docker/master/Manager/HOME/bin/update_etc_hosts.sh)
 ```
-3. setup generic docker account
+4. ~~setup generic docker account~~
 ``` shell
 sudo groupadd docker --gid 1100
 sudo adduser --home /home/docker --uid 1003 --gid 1100 --shell /bin/bash docker
 sudo gpasswd -a docker sudo
 ```
-4. Remove what little bits of pesky security we have for the sevice ID
-``` shell
-echo 'docker ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
-```
-5. copy the ssh keys to docker managers
+5. ~~copy the ssh keys to docker managers~~
 ``` shell
 nodes[0]="dm01"
 nodes[1]="dm02"
