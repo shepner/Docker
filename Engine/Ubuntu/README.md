@@ -10,7 +10,6 @@
 3. Docker settings:
    * assign static IP address. Note we arent going to use DNS/DHCP because those services may be hosted in docker.
    * DNS servers: 208.67.222.222, 208.67.220.220
-   * User ID: docker
 4. setup ssh keys:
 ``` shell
 DHOST=<host IP>
@@ -37,15 +36,22 @@ EOF'
 
 ## setup Docker
 1. login to server: `ssh docker@<host>`
-2. Remove what little bits of pesky security we have for the sevice ID (dont forget to actually run that or you will get `sudo: no tty present and no askpass program specified`)
+2. setup generic docker account
+``` shell
+sudo groupadd docker --gid 1100
+sudo adduser --home /home/docker --uid 1003 --gid 1100 --shell /bin/bash docker
+
+sudo gpasswd -a docker sudo
+```
+3. Remove what little bits of pesky security we have for the sevice ID (dont forget to actually run that or you will get `sudo: no tty present and no askpass program specified`)
 ``` shell
 echo 'docker ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 ```
-3. update the hostfile
+4. update the hostfile
 ``` shell
 bash <(curl -s https://raw.githubusercontent.com/shepner/Docker/master/Manager/HOME/bin/update_etc_hosts.sh)
 ```
-4. update the system
+5. update the system
 ``` shell
 bash <(curl -s https://raw.githubusercontent.com/shepner/Docker/master/Engine/Ubuntu/update_ubuntu.sh)
 ```
