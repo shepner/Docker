@@ -30,7 +30,7 @@ sudo systemctl restart systemd-resolved.service
 
 netstat -tulnp | grep 53
 
-echo "<IP> <name>" | sudo tee --append /etc/hosts
+echo '<IP> <name>' | sudo tee --append /etc/hosts
 ```
 
 ## Instructions for all managers
