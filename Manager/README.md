@@ -23,7 +23,7 @@ Follow the instructions below as appropriate. Everything is using Ubuntu
 DHOST=<host IP>
 ssh-copy-id -i ~/.ssh/docker_rsa docker@$DHOST
 
-scp -i ~/.ssh/docker_rsa ~/.ssh/docker_rsa.pub docker@$DHOST:.ssh/docker_rsa.pub
+scp -i ~/.ssh/docker_rsa ~/.ssh/docker_rsa docker@$DHOST:.ssh/docker_rsa
 ssh -i ~/.ssh/docker_rsa docker@$DHOST "chmod -R 700 ~/.ssh"
 ```
    This might also be a good point to update `~/.ssh/config` so specifying the user ID and identity file is not needed
