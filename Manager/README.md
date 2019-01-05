@@ -17,18 +17,8 @@ Follow the instructions below as appropriate. Everything is using Ubuntu
 3. Docker settings:
    * assign static IP address.  Note we arent going to use DNS/DHCP because those services may be hosted in docker.
    * DNS servers:  208.67.222.222, 208.67.220.220
-   * User ID:  docker
-4. setup ssh keys:
-``` shell
-DHOST=<host IP>
-ssh-copy-id -i ~/.ssh/docker_rsa docker@$DHOST
-
-scp -i ~/.ssh/docker_rsa ~/.ssh/docker_rsa docker@$DHOST:.ssh/docker_rsa
-ssh -i ~/.ssh/docker_rsa docker@$DHOST "chmod -R 700 ~/.ssh"
-```
-   This might also be a good point to update `~/.ssh/config` so specifying the user ID and identity file is not needed
-
-5. ssh to the host `ssh docker@host>` and [disable the local dns listener](https://mmoapi.com/post/how-to-disable-dnsmasq-port-53-listening-on-ubuntu-18-04) (might require a reboot)
+   * create a personal account
+4. ssh to the host `ssh docker@host>` and [disable the local dns listener](https://mmoapi.com/post/how-to-disable-dnsmasq-port-53-listening-on-ubuntu-18-04) (might require a reboot)
 ``` shell
 #sudo netstat -tulnp | grep 53
 echo 'DNSStubListener=no' | sudo tee --append /etc/systemd/resolved.conf
@@ -50,25 +40,26 @@ At this point all managers should be at the same point regardless of where they 
 
 ### setup the Docker service account
 1. login to server: `ssh docker@<host>`
-2. Remove what little bits of pesky security we have for the sevice ID
-``` shell
-echo 'docker ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
-```
-3. update the hostfile
-``` shell
-bash <(curl -s https://raw.githubusercontent.com/shepner/Docker/master/Manager/HOME/bin/update_etc_hosts.sh)
-```
-4. ~~setup generic docker account~~
+2. setup generic docker account
 ``` shell
 sudo groupadd docker --gid 1100
 sudo adduser --home /home/docker --uid 1003 --gid 1100 --shell /bin/bash docker
+
 sudo gpasswd -a docker sudo
 ```
-5. ~~copy the ssh keys to docker managers~~
+3. Remove what little bits of pesky security we have for the sevice ID
+``` shell
+echo 'docker ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
+```
+4. update the hostfile
+``` shell
+bash <(curl -s https://raw.githubusercontent.com/shepner/Docker/master/Manager/HOME/bin/update_etc_hosts.sh)
+```
+5. copy the ssh keys to docker managers
 ``` shell
 nodes[0]="dm01"
 nodes[1]="dm02"
-nodes[3]="dm03"
+nodes[2]="dm03"
 for DHOST in ${nodes[@]} ; do
   ssh-copy-id -i ~/.ssh/<key> docker@$DHOST
   ssh docker@$DHOST "mkdir -p .ssh"
@@ -77,6 +68,8 @@ for DHOST in ${nodes[@]} ; do
   ssh docker@$DHOST "chmod -R 700 ~/.ssh"
 done
 ```
+   This might also be a good point to update `~/.ssh/config` so specifying the user ID and identity file is not needed
+
 
 ### patch the system
 ``` shell
