@@ -21,18 +21,18 @@ docker-machine ls
 
 # dm01
 MANAGERIP=10.1.3.18
-#sudo docker swarm init --advertise-addr $MANAGERIP  
+#sudo docker swarm init --advertise-addr $MANAGERIP
 #docker node update --availability drain dm01
 
 # add the other managers
 #TOKEN=`sudo docker swarm join-token -q manager`
 
 # dm02
-#sudo docker swarm join --token $TOKEN $MANAGERIP:2377
+#ssh -i ~/.ssh/docker_rsa dm02 "sudo docker swarm join --token $TOKEN $MANAGERIP:2377"
 #docker node update --availability drain dm02
 
 # dm03
-#sudo docker swarm join --token $TOKEN $MANAGERIP:2377
+#ssh -i ~/.ssh/docker_rsa dm03 "sudo docker swarm join --token $TOKEN $MANAGERIP:2377"
 #docker node update --availability drain dm03
 
 ####################################
