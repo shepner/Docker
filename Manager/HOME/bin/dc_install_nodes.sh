@@ -14,9 +14,9 @@ nodes[5]="de06"
 docker-machine ls
 
 # setup the ssh keys
-for DE in ${nodes[@]} ; do
-  ssh-copy-id -i ~/.ssh/docker_rsa docker@$DE
-done
+#for DE in ${nodes[@]} ; do
+#  ssh-copy-id -i ~/.ssh/docker_rsa docker@$DE
+#done
 
 # create the docker engines
 for DE in ${nodes[@]} ; do
