@@ -17,6 +17,19 @@ Follow the instructions below as appropriate. Everything is using Ubuntu
 3. add the name/ip to DNS (docker-machine wont work without this!)
 4. assign static IP addrs in DHCP
 5. setup ssh keys: `ssh-copy-id -i ~/.ssh/<key> <user>@<host>`
+6. [disable the local dns listener](https://mmoapi.com/post/how-to-disable-dnsmasq-port-53-listening-on-ubuntu-18-04)
+
+   Note a reboot will likely be needed
+
+``` shell
+netstat -tulnp | grep 53
+
+echo "DNSStubListener=no" | sudo tee --append /etc/systemd/resolved.conf
+sudo systemctl daemon-reload
+sudo systemctl restart systemd-resolved.service
+
+netstat -tulnp | grep 53
+```
 
 ## Instructions for all managers
 
