@@ -17,10 +17,7 @@ Follow the instructions below as appropriate. Everything is using Ubuntu
 3. add the name/ip to DNS (docker-machine wont work without this!)
 4. assign static IP addrs in DHCP
 5. setup ssh keys: `ssh-copy-id -i ~/.ssh/<key> <user>@<host>`
-6. ssh to the host and [disable the local dns listener](https://mmoapi.com/post/how-to-disable-dnsmasq-port-53-listening-on-ubuntu-18-04)
-
-   Note a reboot will likely be needed
-
+6. ssh to the host and [disable the local dns listener](https://mmoapi.com/post/how-to-disable-dnsmasq-port-53-listening-on-ubuntu-18-04) (might require a reboot)
 ``` shell
 netstat -tulnp | grep 53
 
@@ -29,8 +26,6 @@ sudo systemctl daemon-reload
 sudo systemctl restart systemd-resolved.service
 
 netstat -tulnp | grep 53
-
-echo '<IP> <name>' | sudo tee --append /etc/hosts
 ```
 
 ## Instructions for all managers
@@ -39,17 +34,21 @@ At this point all managers should be at the same point regardless of where they 
 
 ### setup the Docker service account
 1. login to server: `ssh <user>@<host>`
-2. setup generic docker account
+2. update the hostfile
+``` shell
+bash <(curl -s https://raw.githubusercontent.com/shepner/Docker/master/Manager/HOME/bin/update_etc_hosts.sh)
+```
+3. setup generic docker account
 ``` shell
 sudo groupadd docker --gid 1100
 sudo adduser --home /home/docker --uid 1003 --gid 1100 --shell /bin/bash docker
 sudo gpasswd -a docker sudo
 ```
-3. Remove what little bits of pesky security we have for the sevice ID
+4. Remove what little bits of pesky security we have for the sevice ID
 ``` shell
 echo 'docker ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 ```
-4. copy the ssh keys to docker managers
+5. copy the ssh keys to docker managers
 ``` shell
 nodes[0]="dm01"
 nodes[1]="dm02"
@@ -62,7 +61,6 @@ for DHOST in ${nodes[@]} ; do
   ssh docker@$DHOST "chmod -R 700 ~/.ssh"
 done
 ```
-
 
 ### patch the system
 ``` shell
