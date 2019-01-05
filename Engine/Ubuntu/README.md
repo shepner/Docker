@@ -11,6 +11,10 @@
 3. assign static IP addrs in DHCP
 4. add the name/ip to DNS (docker-machine wont work without this!)
 5. setup ssh keys: `ssh-copy-id -i ~/.ssh/<key> <user>@<host>`
+6. uninstall unwanted software
+``` shell
+sudo apt-get remove -qy dnsmasq-base
+```
 
 ## setup Docker
 1. login to server: `ssh <user>@<host>`
