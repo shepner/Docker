@@ -12,6 +12,7 @@ NETWORKS="10.0.0.0/8"
 
 sudo docker service create \
   --name plex \
+  --hostname plex \
   --network host \
   --env TZ="America/Chicago" \
   --env PLEX_CLAIM="$CLAIMTOKEN" \
