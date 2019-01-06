@@ -14,9 +14,12 @@
 
 # The claim token can be found here: https://www.plex.tv/claim/
 CLAIMTOKEN=   # only needed with a new setup
+NETWORKS="10.0.0.0/8"
+
 UID=1003
 GID=1100
-NETWORKS="10.0.0.0/8"
+TIMEZONE="America/Chicago"
+
 
 
 # install/update the Absolute Series Scanner plugin
@@ -35,7 +38,7 @@ sudo docker service create \
   --name plex \
   --hostname plex \
   --network host \
-  --env TZ="America/Chicago" \
+  --env TZ=$TIMEZONE \
   --env PLEX_CLAIM="$CLAIMTOKEN" \
   --env PLEX_UID=$UID \
   --env PLEX_GID=$GID \
