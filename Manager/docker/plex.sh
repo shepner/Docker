@@ -50,4 +50,31 @@ sudo docker service create \
   --replicas=1 \
   plexinc/pms-docker  
 
+################################################
+# dont run anything beyond this point
+exit
+
+# trying to find a way to define a static address for the container.  Currently using a bridge for this.
+
+docker network create --driver bridge --subnet=10.1.1.0/24 --gateway=10.1.1.1 docker_bridge
+
+sudo docker service create \
+  --name plex \
+  --hostname plex \
+  --network docker_bridge \
+  --host plex:10.1.1.100 \
+  --env TZ=$TIMEZONE \
+  --env PLEX_CLAIM="$CLAIMTOKEN" \
+  --env PLEX_UID=$UID \
+  --env PLEX_GID=$GID \
+  --env ALLOWED_NETWORKS=$NETWORKS \
+  --mount type=bind,src=/mnt/nas/docker/plex/config,dst=/config \
+  --mount type=bind,src=/mnt/nas/docker/plex/transcode,dst=/transcode \
+  --mount type=bind,src=/mnt/nas/media,dst=/data \
+  --constraint node.role!=manager \
+  --replicas=1 \
+  plexinc/pms-docker  
+
+
+
 
