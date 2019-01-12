@@ -56,7 +56,7 @@ exit
 
 # trying to find a way to define a static address for the container.  Currently using a bridge for this.
 
-sudo docker network create --driver bridge --subnet=10.1.1.0/24 --gateway=10.1.1.1 docker_bridge
+sudo docker network create --attachable --driver bridge --subnet=10.1.1.0/24 --gateway=10.1.1.1 docker_bridge
 
 ssh -i ~/.ssh/docker_rsa de03 " \
   sudo docker run \
