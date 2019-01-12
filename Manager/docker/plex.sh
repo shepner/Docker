@@ -62,8 +62,8 @@ ssh -i ~/.ssh/docker_rsa de03 " \
   sudo docker run \
   --detach \
   --name plex \
-  --network=docker_bridge \
-  --ip 10.1.1.100 \
+  --network=bridge \
+  --ip 172.17.0.100 \
   --env TZ=$TIMEZONE \
   --env PLEX_CLAIM="$CLAIMTOKEN" \
   --env PLEX_UID=$UID \
