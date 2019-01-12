@@ -58,7 +58,7 @@ exit
 
 sudo docker network create --driver bridge --subnet=10.1.1.0/24 --gateway=10.1.1.1 docker_bridge
 
-docker-machine ssh de03 " \
+ssh -i ~/.ssh/docker_rsa de03 " \
   sudo docker run \
   --detach \
   --name plex \
@@ -72,7 +72,6 @@ docker-machine ssh de03 " \
   --volume type=bind,src=/mnt/nas/docker/plex/config,dst=/config \
   --volume type=bind,src=/mnt/nas/docker/plex/transcode,dst=/transcode \
   --volume type=bind,src=/mnt/nas/media,dst=/data \
-  --env constraint:node==de03 \
   plexinc/pms-docker \
 "
 
