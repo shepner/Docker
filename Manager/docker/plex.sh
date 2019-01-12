@@ -73,5 +73,6 @@ sudo docker run \
   --volume type=bind,src=/mnt/nas/docker/plex/config,dst=/config \
   --volume type=bind,src=/mnt/nas/docker/plex/transcode,dst=/transcode \
   --volume type=bind,src=/mnt/nas/media,dst=/data \
+  --env constraint:node==de03 \
   plexinc/pms-docker  
 
