@@ -60,7 +60,7 @@ bash <(curl -s https://raw.githubusercontent.com/shepner/Docker/master/Manager/H
 nodes[0]="dm01"
 nodes[1]="dm02"
 nodes[2]="dm03"
-nodes[2]="dm04"
+nodes[3]="dm04"
 for DHOST in ${nodes[@]} ; do
   ssh-copy-id -i ~/.ssh/<key> docker@$DHOST
   ssh docker@$DHOST "mkdir -p .ssh"
