@@ -1,6 +1,8 @@
 #!/bin/sh
 
 sudo sh -c 'cat >> /etc/hosts << EOF
+10.0.0.67 dm04
+10.0.0.68 dm01
 10.0.0.69 dm02
 10.0.0.70 dm03
 10.0.0.71 de01
