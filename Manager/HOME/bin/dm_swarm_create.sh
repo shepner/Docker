@@ -20,7 +20,7 @@ docker-machine ls
 # https://docs.docker.com/engine/swarm/swarm_manager_locking/
 
 # dm01
-MANAGERIP=10.1.3.18
+MANAGERIP=10.0.0.68
 #sudo docker swarm init --advertise-addr $MANAGERIP
 #docker node update --availability drain dm01
 
@@ -33,6 +33,10 @@ MANAGERIP=10.1.3.18
 
 # dm03
 #ssh -i ~/.ssh/docker_rsa dm03 "sudo docker swarm join --token $TOKEN $MANAGERIP:2377"
+#docker node update --availability drain dm03
+
+# dm04
+#ssh -i ~/.ssh/docker_rsa dm04 "sudo docker swarm join --token $TOKEN $MANAGERIP:2377"
 #docker node update --availability drain dm03
 
 ####################################
