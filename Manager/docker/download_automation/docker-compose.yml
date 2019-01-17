@@ -38,5 +38,21 @@ services:
       - PGID=1100
       - TZ="America/Chicago"
 
-      
+  flexget:
+    image: cpoppema/docker-flexget
+    ports:
+      - "5050:5050"
+    volumes:
+      - /mnt/nas/docker/download_automation/sonarr/config:/config
+      - /mnt/nas/docker/download_automation/downloads:/downloads
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role != manager]
+    environment:
+      - PUID=1003 
+      - PGID=1100
+      - TZ="America/Chicago"
+      - WEB_PASSWD=
+  
     
