@@ -7,6 +7,8 @@ TIMEZONE="America/Chicago"
 BASEPATH=/mnt/nas/docker/flexget
 PASSWD=
 
+mkdir -p $BASEPATH/config
+mkdir -p $BASEPATH/downloads
 
 docker create \
     --name=flexget \
