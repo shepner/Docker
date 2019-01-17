@@ -16,7 +16,7 @@ mkdir -p $BASEDIR/transmission/tv
 
 # flexget
 PASSWD=
-mkdir -p $BASEPATH/flexget/config
+mkdir -p $BASEDIR/flexget/config
 
 sudo docker stack deploy --compose-file docker-compose.yml stacktest
 ```
