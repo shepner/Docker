@@ -14,5 +14,9 @@ mkdir -p $BASEDIR/transmission/watch
 mkdir -p $BASEDIR/transmission/config
 mkdir -p $BASEDIR/transmission/tv
 
+# flexget
+PASSWD=
+mkdir -p $BASEPATH/flexget/config
+
 sudo docker stack deploy --compose-file docker-compose.yml stacktest
 ```
