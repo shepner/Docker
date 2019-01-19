@@ -1,4 +1,4 @@
-hostname: rancher##
+hostname: ros##
 
 rancher:
   network:
@@ -14,6 +14,6 @@ rancher:
         - 208.67.220.220
 
 ssh_authorized_keys:
-  - ssh-rsa <public ssh key> rancher@rancher##
+  - ssh-rsa <public ssh key> rancher@ros##
   
   
