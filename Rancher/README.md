@@ -1,5 +1,6 @@
 # Rancher
 
+## install system
 1) [download rancher](https://github.com/rancher/os)
 2) First machine
    1) VMware host
@@ -39,6 +40,18 @@
          RANCHERIP=
          ssh -i ~/.ssh/rancher_rsa rancher@$RANCHERIP "sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher:latest"
          ```
-      6)  login to https://ros01 and follow instuctions
+## install cluster
+
+1) login to https://ros01 and follow instuctions to get started
+2) [cluster installation](https://rancher.com/docs/rancher/v2.x/en/quick-start-guide/deployment/quickstart-manual-setup/)
+   1) add custom cluster
+      * Provide a name
+      * leave the rest at default
+      * in Node Options, select all the roles
+   2) copy the `sudo docker run ...` command and run from ssh on the node
+   
+   
+
+   
       
       
