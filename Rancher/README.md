@@ -5,7 +5,7 @@
 2) First machine
    1) VMware host
       * VM Settings
-         * Hostname:  "ros01"    
+         * Hostname:  "rosm01"    
          * Guest OS:  Linux; Other Linux (64-bit)
          * CPU: 2 (manager) or 8 (node)
          * RAM: 4G (manager) or 64G (node)
@@ -50,6 +50,7 @@
       * leave the rest at default
       * in Node Options, select the appropriate roles
    2) copy the `sudo docker run ...` command and run from ssh on each node
+Need to have a >50% majority of management (etcd & Control Plane) nodes for the cluster to be up.  This means you must have 1, 3, 5, etc
    
    
 
