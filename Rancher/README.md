@@ -48,8 +48,8 @@
    1) add custom cluster
       * Provide a name
       * leave the rest at default
-      * in Node Options, select all the roles
-   2) copy the `sudo docker run ...` command and run from ssh on the node
+      * in Node Options, select the appropriate roles
+   2) copy the `sudo docker run ...` command and run from ssh on each node
    
    
 
