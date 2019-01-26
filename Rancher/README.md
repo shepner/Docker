@@ -8,7 +8,7 @@
          * Hostname:  "rosm01"    
          * Guest OS:  Linux; Other Linux (64-bit)
          * CPU: 2 (manager) or 8 (node)
-         * RAM: 4G (manager) or 64G (node)
+         * RAM: 8G (manager) or 64G (node)
          * Disk: 20G
    2) RancherOS
       1) `sudo passwd rancher`
