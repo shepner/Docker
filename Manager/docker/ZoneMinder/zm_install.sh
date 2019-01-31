@@ -1,8 +1,22 @@
-$PWD/mysql      # (MySQL Data, drwxr-xr-x 6   27 27)
-$PWD/zoneminder # (directory for images, drwxrwx--- 5 root 33)
-$PWD/backup     # (directory for backups, drwxr-xr-x 2 root root)
-$PWD/conf       # (configuration files, drwxrwxr-x  7 1000 1000, only conf/mysql/my.cnf is required)
-cat conf/mysql/my.cnf
+BASEDIR=/mnt/nas/docker/zoneminder
+
+# (MySQL Data, drwxr-xr-x 6   27 27)
+mkdir -p $BASEDIR/mysql
+chmod -R 755 $BASEDIR/mysql
+
+# (directory for images, drwxrwx--- 5 root 33)
+mkdir -p $BASEDIR/zoneminder
+chmod -R 750 $BASEDIR/zoneminder
+
+# (directory for backups, drwxr-xr-x 2 root root)
+mkdir -p $BASEDIR/backup
+chmod -R 755 $BASEDIR/backup
+
+# (configuration files, drwxrwxr-x  7 1000 1000, only conf/mysql/my.cnf is required)
+mkdir -p $BASEDIR/conf/mysql
+chmod -R 775 $BASEDIR/conf
+
+cat >> $BASEDIR/conf/mysql/my.cnf << EOF
 # For advice on how to change settings please see
 # http://dev.mysql.com/doc/refman/5.7/en/server-configuration-defaults.html
 
@@ -36,3 +50,4 @@ log-error=/var/log/mysqld.log
 pid-file=/var/run/mysqld/mysqld.pid
 sql_mode = NO_ENGINE_SUBSTITUTION
 max_connections = 500
+EOF
