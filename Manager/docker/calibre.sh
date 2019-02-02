@@ -13,22 +13,18 @@
 #  -p YYYY:8081 \
 #  aptalca/docker-rdp-calibre
 
-BASEPATH=/mnt/nas/media
 TIMEZONE="America/Chicago"
+BASEPATH=/mnt/nas/media
 
 mkdir -p $BASEPATH/eBooks2
 
 sudo docker service create \
   --name Calibre \
-  --env EDGE="0" \
-  --env WIDTH="1280" \
-  --env HEIGHT="720" \
-  --env TZ=$TIMEZONE \
-  --publish published=8080,target=8080,protocol=tcp,mode=ingress \
-  --publish published=8081,target=8081,protocol=tcp,mode=ingress \
-  --mount type=bind,src=$BASEPATH/eBooks2,dst=/config \
+  --publish published=6080,target=6080,protocol=tcp,mode=ingress \
   --replicas=1 \
   --constraint 'node.role != manager' \
-  aptalca/docker-rdp-calibre
+  shepner/calibre
+
+--mount type=bind,src=$BASEPATH/eBooks2,dst=/Library \
 
 
