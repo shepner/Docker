@@ -4,6 +4,7 @@ CONFIG_PATH=/mnt/nas/docker/calibre
 LIBRARY_PATH=/mnt/nas/media/eBooks2
 
 sudo mkdir -p $CONFIG_PATH
+sudo chmod -R 775 $CONFIG_PATH
 sudo chown docker:docker $CONFIG_PATH
 
 sudo docker service create \
