@@ -3,7 +3,7 @@
 # Calibre web interface:  8080
 
 CONFIG_PATH=/mnt/nas/docker/calibre
-LIBRARY_PATH=/mnt/nas/media/eBooks2
+LIBRARY_PATH=/mnt/nas/media/eBooks
 
 sudo mkdir -p $CONFIG_PATH
 sudo chmod -R 775 $CONFIG_PATH
