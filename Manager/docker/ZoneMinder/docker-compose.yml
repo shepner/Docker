@@ -9,10 +9,10 @@ services:
         aliases:
           - db
     volumes:
-      - $PWD/mysql:/var/lib/mysql
-      - $PWD/conf/mysql:/etc/mysql:ro
+      - /mnt/nas/docker/zoneminder/mysql:/var/lib/mysql
+      - /mnt/nas/docker/zoneminder/conf/mysql:/etc/mysql:ro
     environment:
-     - TZ=America/Argentina/Buenos_Aires
+     - TZ="America/Chicago"
      - MYSQL_USER=zmuser
      - MYSQL_PASSWORD=zmpass
      - MYSQL_DATABASE=zm
@@ -32,12 +32,12 @@ services:
       - net
     volumes:
       - /var/empty
-      - $PWD/backups:/var/backups
-      - $PWD/zoneminder:/var/cache/zoneminder
+      - /mnt/nas/docker/zoneminder/backups:/var/backups
+      - /mnt/nas/docker/zoneminder/zoneminder:/var/cache/zoneminder
       - type: tmpfs
         target: /dev/shm
     environment:
-     - TZ=America/Argentina/Buenos_Aires
+     - TZ="America/Chicago"
      - VIRTUAL_HOST=zm.localhost, stream0.localhost
      - SERVICE_PORTS="80"
      - ZM_SERVER_HOST=node.0
@@ -57,12 +57,12 @@ services:
       - net
     volumes:
       - /var/empty
-      - $PWD/backups:/var/backups
-      - $PWD/zoneminder:/var/cache/zoneminder
+      - /mnt/nas/docker/zoneminder/backups:/var/backups
+      - /mnt/nas/docker/zoneminder/zoneminder:/var/cache/zoneminder
       - type: tmpfs
         target: /dev/shm
     environment:
-     - TZ=America/Argentina/Buenos_Aires
+     - TZ="America/Chicago"
      - VIRTUAL_HOST=stream{{.Task.Slot}}.localhost
      - SERVICE_PORTS="80"
      - ZM_SERVER_HOST=node.{{.Task.Slot}}
@@ -87,7 +87,7 @@ services:
     networks:
       - net
     environment:
-     - TZ=America/Argentina/Buenos_Aires
+     - TZ="America/Chicago"
     deploy:
       mode: replicated
       replicas: 1
