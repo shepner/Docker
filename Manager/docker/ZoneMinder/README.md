@@ -1,5 +1,6 @@
 # ZoneMinder
 
+``` shell
 CONFIG_PATH=/mnt/nas/docker/zoneminder
 
 sudo mkdir -p $CONFIG_PATH/events
@@ -9,7 +10,7 @@ sudo mkdir -p $CONFIG_PATH/log
 sudo chown -R docker:docker $CONFIG_PATH
 sudo chmod -R 775 $CONFIG_PATH
 
-``` shell
+
 sudo docker service create \
   --name zoneminder \
   --env TZ="America/Chicago" \
@@ -21,7 +22,6 @@ sudo docker service create \
   --replicas=1 \
   --constraint 'node.role != manager' \
   shepner/zoneminder
-
 ```
 
 
