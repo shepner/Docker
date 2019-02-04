@@ -21,6 +21,8 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+      placement:
+        constraints: [node.role != manager]
       endpoint_mode: dnsrr
       restart_policy:
        condition: on-failure
@@ -44,7 +46,10 @@ services:
      - ZM_DB_HOST=db
     deploy:
       mode: replicated
-      replicas: 0
+      #replicas: 0
+      replicas: 1
+      placement:
+        constraints: [node.role != manager]
       restart_policy:
         condition: on-failure
         max_attempts: 3
@@ -69,7 +74,10 @@ services:
      - ZM_DB_HOST=db
     deploy:
       mode: replicated
-      replicas: 0
+      #replicas: 0
+      replicas: 1
+      placement:
+        constraints: [node.role != manager]
       restart_policy:
         condition: on-failure
         max_attempts: 3
