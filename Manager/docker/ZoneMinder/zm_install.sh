@@ -9,8 +9,8 @@ mkdir -p $BASEDIR/zoneminder
 chmod -R 750 $BASEDIR/zoneminder
 
 # (directory for backups, drwxr-xr-x 2 root root)
-mkdir -p $BASEDIR/backup
-chmod -R 755 $BASEDIR/backup
+mkdir -p $BASEDIR/backups
+chmod -R 755 $BASEDIR/backups
 
 # (configuration files, drwxrwxr-x  7 1000 1000, only conf/mysql/my.cnf is required)
 mkdir -p $BASEDIR/conf/mysql
