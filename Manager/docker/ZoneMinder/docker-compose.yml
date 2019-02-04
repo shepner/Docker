@@ -28,8 +28,12 @@ services:
        condition: on-failure
        max_attempts: 3
        window: 120s
-  web:
+  zm:
     image: quantumobject/docker-zoneminder
+    hostname: zm
+    environment:
+      - TZ="America/Chicago"
+      - ZM_DB_HOST=db
     networks:
       - net
     volumes:
@@ -38,16 +42,14 @@ services:
       - /mnt/nas/docker/zoneminder/zoneminder:/var/cache/zoneminder
       - type: tmpfs
         target: /dev/shm
-    environment:
-     - TZ="America/Chicago"
-     - VIRTUAL_HOST=zm.localhost, stream0.localhost
-     - SERVICE_PORTS="80"
-     - ZM_SERVER_HOST=node.0
-     - ZM_DB_HOST=db
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
     deploy:
       mode: replicated
-      #replicas: 0
-      replicas: 1
+      replicas: 0
+      #replicas: 1
       placement:
         constraints: [node.role != manager]
       restart_policy:
@@ -56,57 +58,6 @@ services:
         window: 120s
     depends_on:
       - db
-  stream:
-    image: quantumobject/docker-zoneminder
-    networks:
-      - net
-    volumes:
-      - /var/empty
-      - /mnt/nas/docker/zoneminder/backups:/var/backups
-      - /mnt/nas/docker/zoneminder/zoneminder:/var/cache/zoneminder
-      - type: tmpfs
-        target: /dev/shm
-    environment:
-     - TZ="America/Chicago"
-     - VIRTUAL_HOST=stream{{.Task.Slot}}.localhost
-     - SERVICE_PORTS="80"
-     - ZM_SERVER_HOST=node.{{.Task.Slot}}
-     - ZM_DB_HOST=db
-    deploy:
-      mode: replicated
-      #replicas: 0
-      replicas: 1
-      placement:
-        constraints: [node.role != manager]
-      restart_policy:
-        condition: on-failure
-        max_attempts: 3
-        window: 120s
-    depends_on:
-      - web
-  lb:
-    image: dockercloud/haproxy:1.6.7.1
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    ports:
-      - target: 80
-        published: 80
-        protocol: tcp
-    networks:
-      - net
-    environment:
-     - TZ="America/Chicago"
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: [node.role == manager]
-      restart_policy:
-        condition: on-failure
-        max_attempts: 3
-        window: 120s
-    depends_on:
-      - node0
 networks:
   net:
     driver: overlay
