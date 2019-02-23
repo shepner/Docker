@@ -1,12 +1,12 @@
 #!/bin/bash
 #for some reason I had to use /bin/bash for /bin/sh stuff
 
-nodes[0]="de01a"
-nodes[1]="de01b"
-nodes[2]="de02a"
-nodes[3]="de02b"
-nodes[4]="de03a"
-nodes[5]="de03b"
+nodes[0]="de01"
+nodes[1]="de02"
+nodes[2]="de03"
+nodes[3]="de04"
+nodes[4]="de05"
+nodes[5]="de06"
 
 PATCHCMD="sudo apt-get update && sudo apt-get -y upgrade && sudo apt-get -y dist-upgrade && sudo apt -y autoremove"
 REBOOTCMD="sudo reboot"
