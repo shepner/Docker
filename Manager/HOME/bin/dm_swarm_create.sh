@@ -37,7 +37,7 @@ MANAGERIP=10.0.0.68
 
 # dm04
 #ssh -i ~/.ssh/docker_rsa dm04 "sudo docker swarm join --token $TOKEN $MANAGERIP:2377"
-#docker node update --availability drain dm03
+#docker node update --availability drain dm04
 
 ####################################
 
