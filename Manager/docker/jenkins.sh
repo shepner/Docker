@@ -1,15 +1,7 @@
 #!/bin/sh
 # Jenkins
-# https://jenkins.io/doc/book/installing/#downloading-and-running-jenkins-in-docker
-#docker run \
-#  -u root \
-#  --rm \
-#  -d \
-#  -p 8080:8080 \
-#  -p 50000:50000 \
-#  -v jenkins-data:/var/jenkins_home \
-#  -v /var/run/docker.sock:/var/run/docker.sock \
-#  jenkinsci/blueocean
+# https://hub.docker.com/r/jenkins/jenkins
+# https://github.com/jenkinsci/docker/blob/master/README.md
 
 CONFIG_PATH=/mnt/nas/docker/jenkins
 
@@ -25,15 +17,13 @@ sudo docker service create \
   --mount type=bind,src=$CONFIG_PATH/data,dst=/var/jenkins_home \
   --replicas=1 \
   --constraint 'node.role != manager' \
-  jenkinsci/blueocean 
+  jenkins/jenkins:lts
 
 # [Setup instructions](https://jenkins.io/doc/book/installing/#setup-wizard)
 #
 # For the password:  `sudo cat $CONFIG_PATH/data/secrets/initialAdminPassword`
 # Determine which node it is running on: `docker service ps jenkins`
 # Now goto `http://<node IP address>:8081` and login
-
-
 
 # if you need to bounce the service
 #sudo docker service scale jenkins=0
