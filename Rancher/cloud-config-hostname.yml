@@ -3,11 +3,16 @@ hostname: ros##
 rancher:
   network:
     interfaces:
+      br0:
+        bridge: true
+        dhcp: true
       eth*:
-       dhcp: false
+        dhcp: false
       eth0:
-       address: 10.0.0.##/24
-       gateway: 10.0.0.1
+        address: 10.0.0.##/24
+        gateway: 10.0.0.1
+        bridge: br0
+      
     dns:
       nameservers:
         - 208.67.222.222
