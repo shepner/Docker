@@ -52,7 +52,12 @@
    2) copy the `sudo docker run ...` command and run from ssh on each node
 Need to have a >50% majority of management (etcd & Control Plane) nodes for the cluster to be up.  This means you must have 1, 3, 5, etc
    
-   
+---
+
+Kubernetes networking
+* https://www.rancher.cn/blog/2019/2019-03-21-comparing-kubernetes-cni-providers-flannel-calico-canal-and-weave/
+* [CNI](https://github.com/containernetworking/cni)
+* [flannel](https://github.com/coreos/flannel)
 
    
       
