@@ -1,26 +1,26 @@
-hostname: ros##
+hostname: ros## # https://rancher.com/docs/os/v1.x/en/installation/configuration/hostname/
+
+ssh_authorized_keys: # https://rancher.com/docs/os/v1.x/en/installation/configuration/ssh-keys/
+  - ssh-rsa <public ssh key> rancher@ros##
 
 rancher:
-  network:
-    interfaces:
-      br0:
-        bridge: true
-        dhcp: true
+  network: # https://rancher.com/docs/os/v1.x/en/installation/networking/
+    interfaces: # https://rancher.com/docs/os/v1.x/en/installation/networking/interfaces/
+      #br0:
+      #  bridge: true
+      #  dhcp: true
       eth*:
         dhcp: false
       eth0:
+        #vlans: 100,200
+        #bridge: br0
         address: 10.0.0.##/24
         gateway: 10.0.0.1
-        bridge: br0
-      
-    dns:
+    dns: # https://rancher.com/docs/os/v1.x/en/installation/networking/dns/
       nameservers:
         - 208.67.222.222
         - 208.67.220.220
-  #runcmd:
-  #  - sudo ros service enable 
 
-ssh_authorized_keys:
-  - ssh-rsa <public ssh key> rancher@ros##
-  
+#runcmd: # https://rancher.com/docs/os/v1.x/en/installation/configuration/running-commands/
+  #  - sudo ros service enable
   
