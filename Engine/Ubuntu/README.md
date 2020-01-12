@@ -42,6 +42,9 @@ sudo groupadd docker --gid 1100
 sudo adduser --home /home/docker --uid 1003 --gid 1100 --shell /bin/bash docker
 
 sudo gpasswd -a docker sudo
+
+sudo groupadd asyla --gid 1000
+sudo usermod -a -G asyla docker
 ```
 3. Remove what little bits of pesky security we have for the sevice ID (dont forget to actually run that or you will get `sudo: no tty present and no askpass program specified`)
 ``` shell
