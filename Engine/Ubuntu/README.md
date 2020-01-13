@@ -7,17 +7,30 @@
    * CPU: 8
    * RAM: 64
    * Disk: 128
-3. Docker settings:
+3. NIC settings:
    * assign static IP address. Note we arent going to use DNS/DHCP because those services may be hosted in docker.
    * DNS servers: 208.67.222.222, 208.67.220.220
-4. setup ssh keys:
+4. be sure to setup a normal user account that wont be used for Docker
+5. ssh to the host `ssh <user>@<host>` and create generic docker account
+``` shell
+sudo groupadd asyla --gid 1000
+sudo adduser --home /home/docker --uid 1003 --gid 1000 --shell /bin/bash docker
+
+sudo gpasswd -a docker sudo
+```
+you may need to fix the group name
+6. setup ssh keys:
 ``` shell
 DHOST=<host IP>
 ssh-copy-id -i ~/.ssh/docker_rsa docker@$DHOST
+
+scp ~/.ssh/docker_rsa.pub docker@$DHOST:.ssh/
+scp ~/.ssh/docker_rsa docker@$DHOST:.ssh/
+ssh docker@$DHOST "chmod 600 .ssh/docker_rsa
+scp ~/.ssh/config docker@$DHOST:.ssh/
 ```
    This might also be a good point to update `~/.ssh/config` so specifying the user ID and identity file is not needed
-
-5. ssh to the host `ssh docker@host>` and [disable the local dns listener](https://mmoapi.com/post/how-to-disable-dnsmasq-port-53-listening-on-ubuntu-18-04) (might require a reboot)
+7. ssh to the host `ssh docker@host>` and [disable the local dns listener](https://mmoapi.com/post/how-to-disable-dnsmasq-port-53-listening-on-ubuntu-18-04) (might require a reboot)
 ``` shell
 #sudo netstat -tulnp | grep 53
 echo 'DNSStubListener=no' | sudo tee --append /etc/systemd/resolved.conf
@@ -36,22 +49,15 @@ EOF'
 
 ## setup Docker
 1. login to server: `ssh docker@<host>`
-2. setup generic docker account
-``` shell
-sudo groupadd asyla --gid 1000
-sudo adduser --home /home/docker --uid 1003 --gid 1100 --shell /bin/bash docker
-
-sudo gpasswd -a docker sudo
-```
-3. Remove what little bits of pesky security we have for the sevice ID (dont forget to actually run that or you will get `sudo: no tty present and no askpass program specified`)
+2. Remove what little bits of pesky security we have for the sevice ID (dont forget to actually run that or you will get `sudo: no tty present and no askpass program specified`)
 ``` shell
 echo 'docker ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 ```
-4. update the hostfile
+3. update the hostfile
 ``` shell
 bash <(curl -s https://raw.githubusercontent.com/shepner/Docker/master/Manager/HOME/bin/update_etc_hosts.sh)
 ```
-5. update the system
+4. update the system
 ``` shell
 bash <(curl -s https://raw.githubusercontent.com/shepner/Docker/master/Engine/Ubuntu/update_ubuntu.sh)
 ```
@@ -62,14 +68,21 @@ bash <(curl -s https://raw.githubusercontent.com/shepner/Docker/master/Engine/Ub
 ```
 
 ## setup NFS
+first, update the hosts file for the NFS host
+ ``` shell
+ echo  >> /etc/hosts
+ echo "<IP> <name>" | sudo tee --append /etc/hosts
+ ```
+
 ``` shell
+sudo apt-get update
 sudo apt-get install -y nfs-common
 
 sudo mkdir -p /mnt/nas/docker
-echo "nas:/data1/docker /mnt/nas/docker nfs rw 0 0" | sudo tee --append /etc/fstab
+echo "nas:/mnt/data1/docker /mnt/nas/docker nfs rw 0 0" | sudo tee --append /etc/fstab
 
 sudo mkdir -p /mnt/nas/media
-echo "nas:/data1/media /mnt/nas/media nfs rw 0 0" | sudo tee --append /etc/fstab
+echo "nas:/mnt/data1/media /mnt/nas/media nfs rw 0 0" | sudo tee --append /etc/fstab
 
 sudo mount -a
 
