@@ -24,8 +24,8 @@ To [enable vmware tools](http://rancher.com/docs/os/system-services/adding-syste
 
 VMware settings
 1.  Ubuntu Linux (64-bit)
-2.  CPU: 8
+2.  CPU: 8 (worker) 4 (manager)
 3.  Memory:  16GB
-4.  Disk:  30GB
-5.  Network: 10.1.1.0/24
+4.  Disk:  16GB
+5.  Network: 10.0.0.0/24
 6.  
