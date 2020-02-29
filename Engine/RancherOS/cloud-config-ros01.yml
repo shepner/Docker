@@ -1,4 +1,4 @@
-hostname: de02a
+hostname: ros01
 
 rancher:
   network:
@@ -6,12 +6,9 @@ rancher:
       eth*:
        dhcp: false
       eth0:
-       address: 10.1.1.22/24
-       gateway: 10.1.1.1
+       address: 10.0.0.81/24
+       gateway: 10.0.0.1
     dns:
       nameservers:
         - 208.67.222.222
         - 208.67.220.220
-
-ssh_authorized_keys:
-  - <public key>
