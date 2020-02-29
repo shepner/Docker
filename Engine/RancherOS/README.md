@@ -1,8 +1,8 @@
 # RancherOS
 
-Instructions for manually installing [RancherOS](rancher.com/rancher-os/) came from [here](https://sdbrett.com/BrettsITBlog/2017/01/rancheros-installing-to-hard-disk/)
+Instructions for manually installing [RancherOS](https://rancher.com/rancher-os/) came from [here](https://sdbrett.com/BrettsITBlog/2017/01/rancheros-installing-to-hard-disk/)
 
-Here are the full details for [configuring RancherOS](http://rancher.com/docs/os/configuration/)
+Here are the full details for [configuring RancherOS](https://rancher.com/docs/os/configuration/)
 
 make sure that the system will have internet access.  you wont be able to install to disk without it
 
@@ -11,9 +11,10 @@ make sure that the system will have internet access.  you wont be able to instal
 3.  obtain the ip address of the system:  ```ifconfig eth0```
 4.  on your local machine, generate the ssh keypair you intend to use:  ```ssh-keygen -t rsa```
 5.  ssh to the system:  ```ssh rancher@<ip address>```
-6.  create the config file using the appropriate template (cloud-config-\<hostname\>.yml):  ```vi cloud-config.yml``` Note: dont forget to fill in the blanks!
-7.  install RancherOS to disk and reboot:  ```sudo ros install -c cloud-config.yml -d /dev/sda```
-8.  the local machine should now be able to ssh using the key
+6.  download the config file: ```wget https://github.com/shepner/Docker/blob/master/Engine/RancherOS/cloud-config.yml```
+7.  edit the file:  ```vi cloud-config.yml```
+8.  install RancherOS to disk and reboot:  ```sudo ros install -c cloud-config.yml -d /dev/sda```
+9.  the local machine should now be able to ssh using the key
 
 To [enable vmware tools](http://rancher.com/docs/os/system-services/adding-system-services/):
 1.  ssh to RancherOS
