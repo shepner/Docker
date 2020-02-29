@@ -1,5 +1,15 @@
 # RancherOS
 
+## VMware settings
+
+1.  Ubuntu Linux (64-bit)
+2.  CPU: 8 (worker) 4 (manager)
+3.  Memory:  16GB
+4.  Disk:  16GB
+5.  Network: 10.0.0.0/24
+
+## Install RancherOS
+
 Instructions for manually installing [RancherOS](https://rancher.com/rancher-os/) came from [here](https://sdbrett.com/BrettsITBlog/2017/01/rancheros-installing-to-hard-disk/)
 
 Here are the full details for [configuring RancherOS](https://rancher.com/docs/os/configuration/)
@@ -22,10 +32,3 @@ To [enable vmware tools](http://rancher.com/docs/os/system-services/adding-syste
 3.  start the service:  ```sudo ros service up open-vm-tools```
 4.  validate that it is running:  ```sudo ros service list ```
 
-VMware settings
-1.  Ubuntu Linux (64-bit)
-2.  CPU: 8 (worker) 4 (manager)
-3.  Memory:  16GB
-4.  Disk:  16GB
-5.  Network: 10.0.0.0/24
-6.  
