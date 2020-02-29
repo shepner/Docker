@@ -25,6 +25,8 @@ make sure that the system will have internet access.  you wont be able to instal
 
 ### from a workstation
 
+#### initial config
+
 1.  ssh to the system:
     - ```ssh rancher@<ip address>```
 2.  download the config file:
@@ -33,6 +35,8 @@ make sure that the system will have internet access.  you wont be able to instal
 4.  install RancherOS to disk and reboot:
     - ```sudo ros install -c cloud-config.yml -d /dev/sda```
 5.  the local machine should now be able to ssh using the key
+
+#### vmware tools (not needed in ROSv1.5.5)
 
 To [enable vmware tools](http://rancher.com/docs/os/system-services/adding-system-services/):
 1.  ssh to RancherOS
