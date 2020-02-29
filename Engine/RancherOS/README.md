@@ -3,8 +3,8 @@
 ## VMware settings
 
 1.  Ubuntu Linux (64-bit)
-2.  CPU: 8 (worker) 4 (manager)
-3.  Memory:  16GB
+2.  CPU: 8 (worker) 2 (manager)
+3.  Memory:   64GB (worker) 8GB (manager)
 4.  Disk:  16GB
 5.  Network: 10.0.0.0/24
 
