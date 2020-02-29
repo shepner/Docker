@@ -9,7 +9,7 @@ rancher:
       eth*:
        dhcp: false
       eth0:
-       address: 10.0.0.??/24
+       address: 10.0.0.?/24
        gateway: 10.0.0.1
     dns:
       nameservers:
