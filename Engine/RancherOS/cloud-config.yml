@@ -4,7 +4,7 @@ ssh_authorized_keys:
 - <public key>
 
 runcmd:
-- wget -O /usr/bin/rke  https://github.com/rancher/rke/releases/latest/download/rke_linux-amd64
+- wget -O /usr/bin/rke https://github.com/rancher/rke/releases/latest/download/rke_linux-amd64
 - chmod +x /usr/bin/rke
 
 rancher:
