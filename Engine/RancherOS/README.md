@@ -48,6 +48,8 @@ scp .ssh/rancher_rsa.pub manager:.ssh/id_rsa.pub
 
 ### setup kubernetes cluster
 
+Only run this on one of the 3 managers.
+
 ```
 wget https://raw.githubusercontent.com/shepner/Docker/master/Engine/RancherOS/rancher-cluster.yml
 rke up --config ./rancher-cluster.yml
