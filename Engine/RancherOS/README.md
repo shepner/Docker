@@ -27,6 +27,8 @@ make sure that the system will have internet access.  you wont be able to instal
 
 #### initial config
 
+make sure to create ssh keys in advance
+
 1.  ssh to the system:
     - ```ssh rancher@<ip address>```
 2.  download the config file:
@@ -34,14 +36,19 @@ make sure that the system will have internet access.  you wont be able to instal
 3.  edit the file:  ```vi cloud-config.yml```
 4.  install RancherOS to disk and reboot:
     - ```sudo ros install -c cloud-config.yml -d /dev/sda```
-5.  the local machine should now be able to ssh using the key
 
-#### vmware tools (not needed in ROSv1.5.5)
+##### manager specific
 
-To [enable vmware tools](http://rancher.com/docs/os/system-services/adding-system-services/):
-1.  ssh to RancherOS
-2.  enable the service:  ```sudo ros service enable open-vm-tools```
-3.  start the service:  ```sudo ros service up open-vm-tools```
-4.  validate that it is running:  ```sudo ros service list ```
+install ssh keys:
 
+```
+scp .ssh/rancher_rsa manager:.ssh/id_rsa
+scp .ssh/rancher_rsa.pub manager:.ssh/id_rsa.pub
+```
+
+## setup kubernetes cluster
+
+```
+wget https://raw.githubusercontent.com/shepner/Docker/master/Engine/RancherOS/rancher-cluster.yml
+rke up --config ./rancher-cluster.yml
 ```
