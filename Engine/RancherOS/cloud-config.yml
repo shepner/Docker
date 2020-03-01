@@ -1,17 +1,21 @@
 hostname: ros0?
 
 ssh_authorized_keys:
-  - <public key>
+- <public key>
+
+runcmd:
+- wget -O /usr/bin/rke https://github.com/rancher/rke/releases/download/v1.0.4/rke_linux-amd64
+- chmod +x /usr/bin/rke
 
 rancher:
   network:
     interfaces:
       eth*:
-       dhcp: false
+        dhcp: false
       eth0:
-       address: 10.0.0.?/24
-       gateway: 10.0.0.1
+        address: 10.0.0.?/24
+        gateway: 10.0.0.1
     dns:
       nameservers:
-        - 208.67.222.222
-        - 208.67.220.220
+      - 208.67.222.222
+      - 208.67.220.220
