@@ -56,6 +56,6 @@ wget -P ~/.kube https://raw.githubusercontent.com/shepner/Docker/master/Engine/R
 Only run this on one of the 3 managers:
 
 ```
-rke up --config ~/.kube/config/rancher-cluster.yml
+rke up --config ~/.kube/rancher-cluster.yml
 ln -s ~/.kube/rancher-cluster.yml ~/.kube/config
 ```
