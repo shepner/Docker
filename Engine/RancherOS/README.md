@@ -49,12 +49,13 @@ scp .ssh/rancher_rsa.pub manager:.ssh/id_rsa.pub
 [RKE install instructions](https://rancher.com/docs/rke/latest/en/installation/)
 
 ```
-mkdir -p ~/.kube/config
-wget -P ~/.kube/config https://raw.githubusercontent.com/shepner/Docker/master/Engine/RancherOS/rancher-cluster.yml
+mkdir ~/.kube
+wget -P ~/.kube https://raw.githubusercontent.com/shepner/Docker/master/Engine/RancherOS/rancher-cluster.yml
 ```
 
 Only run this on one of the 3 managers:
 
 ```
 rke up --config ~/.kube/config/rancher-cluster.yml
+ln -s ~/.kube/rancher-cluster.yml ~/.kube/config
 ```
