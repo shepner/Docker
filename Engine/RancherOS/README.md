@@ -53,8 +53,8 @@ scp .ssh/rancher_rsa.pub manager:.ssh/id_rsa.pub
 #### setup kubernetes cluster
 
 [Rancher cluster instructions](https://rancher.com/docs/rancher/v2.x/en/installation/k8s-install/kubernetes-rke/)
-[RKE install instructions](https://rancher.com/docs/rke/latest/en/installation/)
 
+[RKE install instructions](https://rancher.com/docs/rke/latest/en/installation/)
 
 ```
 mkdir ~/.kube
