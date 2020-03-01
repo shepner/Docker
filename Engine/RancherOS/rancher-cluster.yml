@@ -1,10 +1,26 @@
 nodes:
-  - address: 127.0.0.1
-    internal_address: 172.16.0.128
+  - address: 10.0.0.91
+    #internal_address: 172.16.22.12
     user: rancher
     role: [controlplane, worker, etcd]
+  - address: 10.0.0.92
+    #internal_address: 172.16.32.37
+    user: rancher
+    role: [controlplane, worker, etcd]
+  - address: 10.0.0.93
+    #internal_address: 172.16.42.73
+    user: rancher
+    role: [controlplane, worker, etcd]
+
 services:
   etcd:
     snapshot: true
     creation: 6h
     retention: 24h
+
+# Required for external TLS termination with
+# ingress-nginx v0.22+
+ingress:
+  provider: nginx
+  options:
+    use-forwarded-headers: "true"
