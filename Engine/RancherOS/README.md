@@ -56,6 +56,8 @@ scp .ssh/rancher_rsa.pub manager:.ssh/id_rsa.pub
 
 [RKE install instructions](https://rancher.com/docs/rke/latest/en/installation/)
 
+[kubernetes install](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+
 ```
 mkdir ~/.kube
 wget -P ~/.kube https://raw.githubusercontent.com/shepner/Docker/master/Engine/RancherOS/rancher-cluster.yml
