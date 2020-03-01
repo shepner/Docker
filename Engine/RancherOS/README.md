@@ -37,16 +37,16 @@ make sure to create ssh keys in advance
 4.  install RancherOS to disk and reboot:
     - ```sudo ros install -c cloud-config.yml -d /dev/sda```
 
-##### manager specific
+## manager specific
 
-install ssh keys:
+### install ssh keys:
 
 ```
 scp .ssh/rancher_rsa manager:.ssh/id_rsa
 scp .ssh/rancher_rsa.pub manager:.ssh/id_rsa.pub
 ```
 
-## setup kubernetes cluster
+### setup kubernetes cluster
 
 ```
 wget https://raw.githubusercontent.com/shepner/Docker/master/Engine/RancherOS/rancher-cluster.yml
