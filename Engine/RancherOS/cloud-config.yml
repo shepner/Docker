@@ -3,10 +3,6 @@ hostname: ros0?
 ssh_authorized_keys:
 - <public key>
 
-runcmd:
-- wget -O /usr/bin/rke https://github.com/rancher/rke/releases/latest/download/rke_linux-amd64
-- chmod +x /usr/bin/rke
-
 rancher:
   network:
     interfaces:
@@ -21,3 +17,24 @@ rancher:
       - 208.67.220.220
   services_include:
     open-vm-tools: true
+
+write_files:
+- container: ntp
+  path: /etc/ntp.conf
+  permissions: "0644"
+  owner: root
+  content: |
+    server 0.pool.ntp.org iburst
+    server 1.pool.ntp.org iburst
+    server 2.pool.ntp.org iburst
+    server 3.pool.ntp.org iburst
+    
+    # Allow only time queries, at a limited rate, sending KoD when in excess.
+    # Allow all local queries (IPv4, IPv6)
+    restrict default nomodify nopeer noquery limited kod
+    restrict 127.0.0.1
+    restrict [::1]
+      
+runcmd:
+- wget -O /usr/bin/rke https://github.com/rancher/rke/releases/latest/download/rke_linux-amd64
+- chmod +x /usr/bin/rke
