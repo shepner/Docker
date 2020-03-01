@@ -23,9 +23,7 @@ make sure that the system will have internet access.  you wont be able to instal
 3.  obtain the ip address of the system:  ```ifconfig eth0```
 4.  on your local machine, generate the ssh keypair you intend to use:  ```ssh-keygen -t rsa```
 
-### from a workstation
-
-#### initial config
+### initial config from a workstation
 
 make sure to create ssh keys in advance
 
@@ -48,9 +46,10 @@ scp .ssh/rancher_rsa.pub manager:.ssh/id_rsa.pub
 
 ### setup kubernetes cluster
 
-Only run this on one of the 3 managers.
+Only run this on one of the 3 managers:
 
 ```
-wget https://raw.githubusercontent.com/shepner/Docker/master/Engine/RancherOS/rancher-cluster.yml
-rke up --config ./rancher-cluster.yml
+mkdir -P ~/.kube/config
+wget -P ~/.kube/config https://raw.githubusercontent.com/shepner/Docker/master/Engine/RancherOS/cluster.yml
+rke up --config ~/.kube/config/cluster.yml
 ```
