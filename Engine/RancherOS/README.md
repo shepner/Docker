@@ -37,6 +37,10 @@ make sure to create ssh keys in advance
 
 ## manager specific
 
+### setup nodes and a load balancer
+
+[instructions](https://rancher.com/docs/rancher/v2.x/en/installation/k8s-install/create-nodes-lb/)
+
 ### install ssh keys:
 
 ```
@@ -44,9 +48,13 @@ scp .ssh/rancher_rsa manager:.ssh/id_rsa
 scp .ssh/rancher_rsa.pub manager:.ssh/id_rsa.pub
 ```
 
-### setup kubernetes cluster
+### install rancher
 
+#### setup kubernetes cluster
+
+[Rancher cluster instructions](https://rancher.com/docs/rancher/v2.x/en/installation/k8s-install/kubernetes-rke/)
 [RKE install instructions](https://rancher.com/docs/rke/latest/en/installation/)
+
 
 ```
 mkdir ~/.kube
@@ -58,4 +66,21 @@ Only run this on one of the 3 managers:
 ```
 rke up --config ~/.kube/rancher-cluster.yml
 ln -s ~/.kube/rancher-cluster.yml ~/.kube/config
+```
+
+#### install rancher 
+
+[instructions](https://rancher.com/docs/rancher/v2.x/en/installation/k8s-install/helm-rancher/)
+
+```
+helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
+kubectl create namespace cattle-system
+
+helm install rancher rancher-stable/rancher \
+  --namespace cattle-system \
+  --set hostname=rancher.my.org \
+  --set ingress.tls.source=letsEncrypt \
+  --set letsEncrypt.email=me@example.org
+  
+kubectl -n cattle-system rollout status deploy/rancher
 ```
