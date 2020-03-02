@@ -67,7 +67,7 @@ Only run this on one of the 3 managers:
 
 ```
 rke up --config ~/.kube/rancher-cluster.yml
-ln -s ~/.kube/rancher-cluster.yml ~/.kube/config
+ln -s ~/.kube/kube_config_rancher-cluster.yml ~/.kube/config
 ```
 
 #### install rancher 
