@@ -1,17 +1,17 @@
-hostname: ros0?
+hostname: ros0? # https://rancher.com/docs/os/v1.x/en/installation/configuration/hostname/
 
-ssh_authorized_keys:
+ssh_authorized_keys: # https://rancher.com/docs/os/v1.x/en/installation/configuration/ssh-keys/
 - <public key>
 
 rancher:
-  network:
-    interfaces:
+  network: # https://rancher.com/docs/os/v1.x/en/installation/networking/
+    interfaces: # https://rancher.com/docs/os/v1.x/en/installation/networking/interfaces/
       eth*:
         dhcp: false
       eth0:
         address: 10.0.0.?/24
         gateway: 10.0.0.1
-    dns:
+    dns: # https://rancher.com/docs/os/v1.x/en/installation/networking/dns/
       nameservers:
       - 208.67.222.222
       - 208.67.220.220
@@ -35,7 +35,7 @@ write_files:
     restrict 127.0.0.1
     restrict [::1]
       
-runcmd:
+runcmd: # https://rancher.com/docs/os/v1.x/en/installation/configuration/running-commands/
 # Rancher RKE
 # https://rancher.com/docs/rke/latest/en/installation/#download-the-rke-binary
 - wget -O /usr/bin/rke https://github.com/rancher/rke/releases/latest/download/rke_linux-amd64 && chmod +x /usr/bin/rke
