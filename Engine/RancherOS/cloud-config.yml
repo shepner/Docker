@@ -18,7 +18,7 @@ rancher:
   services_include:
     open-vm-tools: true
 
-write_files: https://rancher.com/docs/os/v1.x/en/installation/configuration/write-files/#writing-files-in-specific-system-services
+write_files: # https://rancher.com/docs/os/v1.x/en/installation/configuration/write-files/#writing-files-in-specific-system-services
 - container: ntp
   path: /etc/ntp.conf
   permissions: "0644"
