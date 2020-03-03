@@ -39,7 +39,7 @@ write_files: # https://rancher.com/docs/os/v1.x/en/installation/configuration/wr
       
 runcmd: # https://rancher.com/docs/os/v1.x/en/installation/configuration/running-commands/
 # Add needed local dns entry
-grep -qxF '10.0.0.90 rancher' /etc/hosts || echo '10.0.0.90 rancher' >> /etc/hosts
+- grep -qxF '10.0.0.90 rancher' /etc/hosts || echo '10.0.0.90 rancher' >> /etc/hosts
 # Rancher RKE
 # https://rancher.com/docs/rke/latest/en/installation/#download-the-rke-binary
 - wget -O /usr/bin/rke https://github.com/rancher/rke/releases/latest/download/rke_linux-amd64 && chmod +x /usr/bin/rke
