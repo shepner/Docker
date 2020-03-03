@@ -1,4 +1,6 @@
-hostname: ros0? # https://rancher.com/docs/os/v1.x/en/installation/configuration/hostname/
+# this file is to bootstrap your initial RancherOS install with minimal modifications required
+
+hostname: k8s0? # https://rancher.com/docs/os/v1.x/en/installation/configuration/hostname/
 
 ssh_authorized_keys: # https://rancher.com/docs/os/v1.x/en/installation/configuration/ssh-keys/
 - <public key>
