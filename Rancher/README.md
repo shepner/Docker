@@ -32,7 +32,7 @@ make sure to create ssh keys in advance
 1.  ssh to the system:
     - ```ssh rancher@<ip address>```
 2.  download the config file:
-    - ```wget https://raw.githubusercontent.com/shepner/Docker/master/Engine/RancherOS/cloud-config.yml```
+    - ```wget https://raw.githubusercontent.com/shepner/Docker/master/Rancher/cloud-config.yml```
 3.  edit the file:  ```vi cloud-config.yml```
 4.  install RancherOS to disk and reboot:
     - ```sudo ros install -c cloud-config.yml -d /dev/sda```
@@ -46,7 +46,7 @@ make sure to create ssh keys in advance
 On the NGINX Load Balancer:
 
 ```
-wget -P /home/rancher https://raw.githubusercontent.com/shepner/Docker/master/Engine/RancherOS/nginx.conf
+wget -P /home/rancher https://raw.githubusercontent.com/shepner/Docker/master/Rancher/nginx.conf
 ```
 
 edit the file as appropriate: `vi /home/rancher/nginx.conf`
@@ -77,7 +77,7 @@ scp .ssh/rancher_rsa.pub manager:.ssh/id_rsa.pub
 
 ```
 mkdir ~/.kube
-wget -P ~/.kube https://raw.githubusercontent.com/shepner/Docker/master/Engine/RancherOS/rancher-cluster.yml
+wget -P ~/.kube https://raw.githubusercontent.com/shepner/Docker/master/Rancher/rancher-cluster.yml
 ```
 
 Only run this on one of the 3 managers:
