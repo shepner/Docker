@@ -1,5 +1,7 @@
 # RancherOS
 
+This is for deploying a redundent Kubernetes cluster via RKE to run Rancher.
+
 ## VMware settings
 
 1.  Ubuntu Linux (64-bit)
