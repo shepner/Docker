@@ -76,13 +76,58 @@ ln -s ~/.kube/kube_config_rancher-cluster.yml ~/.kube/config
 
 ```
 helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
-kubectl create namespace cattle-system
 
+kubectl create namespace cattle-system
+```
+
+Install the cert manager
+
+```
+# Install the CustomResourceDefinition resources separately
+kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.12/deploy/manifests/00-crds.yaml
+
+# Create the namespace for cert-manager
+kubectl create namespace cert-manager
+
+# Add the Jetstack Helm repository
+helm repo add jetstack https://charts.jetstack.io
+
+# Update your local Helm chart repository cache
+helm repo update
+
+# Install the cert-manager Helm chart
+helm install \
+  cert-manager jetstack/cert-manager \
+  --namespace cert-manager \
+  --version v0.12.0
+```
+
+verify is is running:
+
+```
+kubectl get pods --namespace cert-manager
+```
+
+Do this if using Rancher with self signed certs:
+
+```
+helm install rancher rancher-stable/rancher \
+  --namespace cattle-system \
+  --set hostname=rancher.my.org
+```
+
+or do this for Rancher with Lets Encrypt certs:
+
+```
 helm install rancher rancher-stable/rancher \
   --namespace cattle-system \
   --set hostname=rancher.my.org \
   --set ingress.tls.source=letsEncrypt \
   --set letsEncrypt.email=me@example.org
-  
+```
+
+To watch status updates:
+
+```
 kubectl -n cattle-system rollout status deploy/rancher
 ```
