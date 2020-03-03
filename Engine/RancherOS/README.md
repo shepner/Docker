@@ -41,6 +41,21 @@ make sure to create ssh keys in advance
 
 [instructions](https://rancher.com/docs/rancher/v2.x/en/installation/k8s-install/create-nodes-lb/)
 
+On the NGINX Load Balancer:
+
+```
+wget -P /home/rancher https://raw.githubusercontent.com/shepner/Docker/master/Engine/RancherOS/nginx.conf
+```
+
+edit the file as appropriate: `vi /home/rancher/nginx.conf`
+
+```
+docker run -d --restart=unless-stopped \
+  -p 80:80 -p 443:443 \
+  -v /home/rancher/nginx.conf:/etc/nginx/nginx.conf \
+  nginx:1.15
+```
+
 ### install ssh keys:
 
 ```
