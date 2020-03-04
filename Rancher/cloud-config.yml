@@ -38,23 +38,15 @@ write_files: # https://rancher.com/docs/os/v1.x/en/installation/configuration/wr
     restrict [::1]
       
 runcmd: # https://rancher.com/docs/os/v1.x/en/installation/configuration/running-commands/
-# fetch the latest configs and merge them in.  Some items may require another reboot to take effect
-- wget -O /home/rancher/cloud-config.yml https://raw.githubusercontent.com/shepner/Docker/master/Rancher/cloud-config-???hostname???.yml
-- ros config merge -i /home/rancher/cloud-config.yml && rm /home/rancher/cloud-config.yml
-# Add needed local dns entry
+# Add needed local DNS entry
 - grep -qxF '10.0.0.90 rancher rancher.asyla.org' /etc/hosts || echo '10.0.0.90 rancher rancher.asyla.org' >> /etc/hosts
-# Rancher RKE
-# https://rancher.com/docs/rke/latest/en/installation/#download-the-rke-binary
+# [Rancher RKE](https://rancher.com/docs/rke/latest/en/installation/#download-the-rke-binary)
 - wget -O /usr/bin/rke https://github.com/rancher/rke/releases/latest/download/rke_linux-amd64 && chmod +x /usr/bin/rke
-# CURL
-# https://thomasmodeneis.wordpress.com/2017/06/23/installing-curl-on-rancheros/
-#- echo 'docker run --rm radial/busyboxplus:curl curl $@' > /usr/bin/curl && chmod +x /usr/bin/curl
-# Helm
-# https://helm.sh/docs/intro/install/
-#- wget -P /tmp https://get.helm.sh/helm-`wget https://github.com/helm/helm/releases -O - 2>&1 | grep 'href="/helm/helm/releases/tag/v3.' | grep -v no-underline | head -n 1 | cut -d '"' -f 2 | awk '{n=split($NF,a,"/");print a[n]}' | awk 'a !~ $0{print}; {a=$0}'`-linux-amd64.tar.gz
+# [Helm](https://helm.sh/docs/intro/install/)
 - wget -P /tmp https://get.helm.sh/helm-`wget https://api.github.com/repos/helm/helm/releases/latest -O - | jq '.tag_name' -r`-linux-amd64.tar.gz
 - gunzip /tmp/helm-* && tar -xf /tmp/helm-*.tar -C /tmp && mv /tmp/linux-amd64/helm /usr/bin/helm
-# Kubernetes
-# https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux
+# [Kubernetes](https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux)
 - wget -O /usr/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/`wget -O - https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 - chmod +x /usr/bin/kubectl
+# [CURL](https://thomasmodeneis.wordpress.com/2017/06/23/installing-curl-on-rancheros/)
+#- echo 'docker run --rm radial/busyboxplus:curl curl $@' > /usr/bin/curl && chmod +x /usr/bin/curl
