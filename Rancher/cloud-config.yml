@@ -40,8 +40,11 @@ write_files: # https://rancher.com/docs/os/v1.x/en/installation/configuration/wr
     restrict [::1]
       
 runcmd: # https://rancher.com/docs/os/v1.x/en/installation/configuration/running-commands/
+# fetch the latest configs and merge them in.  Some items may require another reboot to take effect
+- wget -O /home/rancher/cloud-config.yml https://raw.githubusercontent.com/shepner/Docker/master/Rancher/cloud-config-???hostname???.yml
+- ros config merge -i /home/rancher/cloud-config.yml
 # Add needed local dns entry
-- grep -qxF '10.0.0.90 rancher' /etc/hosts || echo '10.0.0.90 rancher' >> /etc/hosts
+- grep -qxF '10.0.0.90 rancher rancher.asyla.org' /etc/hosts || echo '10.0.0.90 rancher rancher.asyla.org' >> /etc/hosts
 # Rancher RKE
 # https://rancher.com/docs/rke/latest/en/installation/#download-the-rke-binary
 - wget -O /usr/bin/rke https://github.com/rancher/rke/releases/latest/download/rke_linux-amd64 && chmod +x /usr/bin/rke
