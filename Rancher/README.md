@@ -56,7 +56,8 @@ On the NGINX Load Balancer machine:
 wget -P /home/rancher https://raw.githubusercontent.com/shepner/Docker/master/Rancher/nginx.conf
 ```
 
-edit the file as appropriate: `vi /home/rancher/nginx.conf`
+edit the file as appropriate:
+`vi /home/rancher/nginx.conf`
 
 ```
 docker run \
@@ -112,7 +113,6 @@ helm install cert-manager jetstack/cert-manager --namespace cert-manager --versi
 ```
 
 verify is is running:
-
 `kubectl get pods --namespace cert-manager`
 
 ### install rancher 
@@ -146,5 +146,4 @@ or do this for Rancher with Lets Encrypt certs:
 ```
 
 To watch status updates:
-
 `kubectl -n cattle-system rollout status deploy/rancher`
