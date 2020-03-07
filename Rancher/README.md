@@ -115,7 +115,7 @@ helm install cert-manager jetstack/cert-manager --namespace cert-manager --versi
 verify is is running:
 `kubectl get pods --namespace cert-manager`
 
-### Install rancher ([instructions](https://rancher.com/docs/rancher/v2.x/en/installation/k8s-install/helm-rancher/))
+### Install Rancher ([instructions](https://rancher.com/docs/rancher/v2.x/en/installation/k8s-install/helm-rancher/))
 
 ```
 # Update your local Helm chart repository cache
