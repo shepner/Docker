@@ -22,7 +22,7 @@ do this on the VM itself:
 
 1.  make sure to create ssh keys in advance
 2.  boot up under VMware in the usual way
-3.  run the following command and change the password:  
+3.  run the following command and change the password:
     `sudo passwd rancher`
 4.  obtain the ip address of the system:
     `ifconfig eth0`
