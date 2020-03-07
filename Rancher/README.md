@@ -91,6 +91,8 @@ rke up --config ~/.kube/rancher-cluster.yml
 ln -s ~/.kube/kube_config_rancher-cluster.yml ~/.kube/config
 ```
 
+if you remove the cluster, reboot the nodes to clear out the docker instances.
+
 ### Install the cert manager
 
 ```
