@@ -71,7 +71,7 @@ docker run \
 
 ## Rancher
 
-### setup kubernetes cluster
+### Setup the Rancher cluster
 
 [Rancher cluster instructions](https://rancher.com/docs/rancher/v2.x/en/installation/k8s-install/kubernetes-rke/)
 
