@@ -6,8 +6,8 @@ This is for deploying a redundent Kubernetes cluster via RKE to run Rancher.
 
 1.  Ubuntu Linux (64-bit)
 2.  CPU: 8 (worker) 2 (manager)
-3.  Memory:   64GB (worker) 8GB (manager)
-4.  Disk:  16GB
+3.  Memory:   64GB (worker) 16GB (manager)
+4.  Disk:  60GB
 5.  Network: 10.0.0.0/24
 
 ## Install RancherOS
