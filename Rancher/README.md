@@ -4,7 +4,7 @@ This is for deploying a redundent Kubernetes cluster via RKE to run Rancher.
 
 ## VMware settings
 
-1.  Ubuntu Linux (64-bit)
+1.  Other 4.x or later Linux (64-bit)
 2.  CPU: 8 (worker) 2 (manager)
 3.  Memory:   64GB (worker) 16GB (manager)
 4.  Disk:  60GB
