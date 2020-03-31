@@ -149,3 +149,6 @@ or do this for Rancher with Lets Encrypt certs:
 
 To watch status updates:
 `kubectl -n cattle-system rollout status deploy/rancher`
+
+### [Upgrade Rancher](https://rancher.com/docs/rancher/v2.x/en/upgrades/upgrades/ha/)
+
