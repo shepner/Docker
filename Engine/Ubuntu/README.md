@@ -79,10 +79,13 @@ sudo apt-get update
 sudo apt-get install -y nfs-common
 
 sudo mkdir -p /mnt/nas/docker
-echo "nas:/mnt/data1/docker /mnt/nas/docker nfs rw 0 0" | sudo tee --append /etc/fstab
+echo "nas:/mnt/data2/docker /mnt/nas/docker nfs rw 0 0" | sudo tee --append /etc/fstab
 
 sudo mkdir -p /mnt/nas/media
 echo "nas:/mnt/data1/media /mnt/nas/media nfs rw 0 0" | sudo tee --append /etc/fstab
+
+sudo mkdir -p /mnt/nas/torrent
+echo "nas:/mnt/data1/torrent /mnt/nas/torrent nfs rw 0 0" | sudo tee --append /etc/fstab
 
 sudo mount -a
 
