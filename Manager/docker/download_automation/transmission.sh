@@ -23,4 +23,5 @@ sudo docker service create \
   --mount type=bind,src=$BASEPATH/config,dst=/config \
   --mount type=bind,src=$BASEPATH/watch,dst=/watch \
   --mount type=bind,src=$BASEPATH/downloads,dst=/downloads \
+  --constraint 'node.role != manager' \
   linuxserver/transmission
