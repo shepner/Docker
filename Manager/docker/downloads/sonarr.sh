@@ -13,6 +13,7 @@ mkdir -p /mnt/nas/docker/sonarr/downloads
 
 sudo docker service create \
   --name sonarr \
+  --constraint 'node.role != manager' \
   --publish published=8989,target=8989,protocol=tcp,mode=ingress \
   --env PUID=$UID \
   --env PGID=$GID \
