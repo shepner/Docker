@@ -6,7 +6,7 @@
 UID=1003
 GID=1100
 TIMEZONE="America/Chicago"
-BASEPATH=/mnt/nas/torrent
+BASEPATH=/mnt/nas/docker/transmission
 
 mkdir -p $BASEPATH/config
 mkdir -p $BASEPATH/watch
