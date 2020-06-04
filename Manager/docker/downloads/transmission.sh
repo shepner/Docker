@@ -1,8 +1,5 @@
 #!/bin/sh
-
-# https://www.linuxserver.io/our-images
-# https://hub.docker.com/r/linuxserver/transmission
-
+# https://docs.linuxserver.io/images/docker-transmission
 
 UID=1003
 GID=1100
