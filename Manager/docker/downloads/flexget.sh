@@ -4,7 +4,9 @@
 UID=1003
 GID=1100
 TIMEZONE="America/Chicago"
-BASEPATH=/mnt/nas/docker/flexget
+NAME=flexget
+BASEPATH=/mnt/nas/downloads/$NAME
+
 PASSWD=
 
 mkdir -p $BASEPATH/config
@@ -22,5 +24,4 @@ docker create \
     -v $BASEPATH/config:/config \
     -v $BASEPATH/downloads:/downloads \
     cpoppema/docker-flexget
-    
     
