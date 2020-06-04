@@ -3,18 +3,21 @@
 # https://www.linuxserver.io/our-images
 # https://hub.docker.com/r/linuxserver/transmission
 
+
 UID=1003
 GID=1100
 TIMEZONE="America/Chicago"
-#BASEPATH=/mnt/nas/docker/transmission
-BASEPATH=/mnt/nas/downloads
+NAME=transmission
+#BASEPATH=/mnt/nas/docker/$NAME
+BASEPATH=/mnt/nas/downloads/$NAME
 
 mkdir -p $BASEPATH/config
 mkdir -p $BASEPATH/watch
 mkdir -p $BASEPATH/downloads
 
 sudo docker service create \
-  --name transmission \
+  --name $NAME \
+  --constraint 'node.role != manager' \
   --env PUID=$UID \
   --env PGID=$GID \
   --env TZ=$TIMEZONE \
@@ -24,5 +27,4 @@ sudo docker service create \
   --mount type=bind,src=$BASEPATH/config,dst=/config \
   --mount type=bind,src=$BASEPATH/watch,dst=/watch \
   --mount type=bind,src=$BASEPATH/downloads,dst=/downloads \
-  --constraint 'node.role != manager' \
   linuxserver/transmission
