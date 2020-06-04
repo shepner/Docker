@@ -1,7 +1,5 @@
 #!/bin/sh
-
-# https://www.linuxserver.io/our-images
-# https://hub.docker.com/r/linuxserver/sonarr
+# https://docs.linuxserver.io/images/docker-sonarr
 
 UID=1003
 GID=1100
@@ -25,5 +23,3 @@ sudo docker service create \
   --mount type=bind,src=$BASEPATH/tv,dst=/tv \
   --mount type=bind,src=$BASEPATH/downloads,dst=/downloads \
   linuxserver/sonarr
-
-
