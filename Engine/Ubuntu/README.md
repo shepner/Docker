@@ -84,8 +84,8 @@ echo "nas:/mnt/data2/docker /mnt/nas/docker nfs rw 0 0" | sudo tee --append /etc
 sudo mkdir -p /mnt/nas/media
 echo "nas:/mnt/data1/media /mnt/nas/media nfs rw 0 0" | sudo tee --append /etc/fstab
 
-sudo mkdir -p /mnt/nas/torrent
-echo "nas:/mnt/data1/torrent /mnt/nas/torrent nfs rw 0 0" | sudo tee --append /etc/fstab
+sudo mkdir -p /mnt/nas/downloads
+echo "nas:/mnt/data1/downloads /mnt/nas/downloads nfs rw 0 0" | sudo tee --append /etc/fstab
 
 sudo mount -a
 
