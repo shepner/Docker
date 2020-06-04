@@ -9,7 +9,7 @@ BASEPATH=/mnt/nas/downloads/$NAME
 
 mkdir -p $BASEPATH/config
 mkdir -p $BASEPATH/tv
-mkdir -p $BASEPATH/downloads
+#mkdir -p $BASEPATH/downloads
 
 sudo docker service create \
   --name $NAME \
@@ -21,5 +21,5 @@ sudo docker service create \
   --mount type=bind,src=/etc/localtime,dst=/etc/localtime,readonly=1 \
   --mount type=bind,src=$BASEPATH/config,dst=/config \
   --mount type=bind,src=$BASEPATH/tv,dst=/tv \
-  --mount type=bind,src=$BASEPATH/downloads,dst=/downloads \
+  --mount type=bind,src=/mnt/nas/downloads/transmission/downloads,dst=/downloads \
   linuxserver/sonarr
