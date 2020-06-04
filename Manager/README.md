@@ -84,8 +84,8 @@ sudo apt-get install -y nfs-common
 sudo mkdir -p /mnt/nas/docker
 echo "nas:/data1/docker /mnt/nas/docker nfs rw 0 0" | sudo tee --append /etc/fstab
 
-sudo mkdir -p /mnt/nas/torrent
-echo "nas:/mnt/data1/torrent /mnt/nas/torrent nfs rw 0 0" | sudo tee --append /etc/fstab
+sudo mkdir -p /mnt/nas/downloads
+echo "nas:/mnt/data1/downloads /mnt/nas/downloads nfs rw 0 0" | sudo tee --append /etc/fstab
 
 sudo mount -a
 
