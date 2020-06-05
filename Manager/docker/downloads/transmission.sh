@@ -5,7 +5,6 @@ UID=1003
 GID=1000
 TIMEZONE="America/Chicago"
 NAME=transmission
-#BASEPATH=/mnt/nas/docker/$NAME
 BASEPATH=/mnt/nas/downloads/$NAME
 
 mkdir -p $BASEPATH/config
