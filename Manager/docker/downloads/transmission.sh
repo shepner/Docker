@@ -2,7 +2,7 @@
 # https://docs.linuxserver.io/images/docker-transmission
 
 UID=1003
-GID=1100
+GID=1000
 TIMEZONE="America/Chicago"
 NAME=transmission
 #BASEPATH=/mnt/nas/docker/$NAME
