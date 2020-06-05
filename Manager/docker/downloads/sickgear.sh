@@ -17,7 +17,7 @@ sudo docker service create \
   --env PUID=$UID \
   --env PGID=$GID \
   --env TZ=$TIMEZONE \
-  --publish published=9091,target=8081,protocol=tcp,mode=ingress \
+  --publish published=8089,target=8081,protocol=tcp,mode=ingress \
   --mount type=bind,src=$BASEPATH/config,dst=/config \
   --mount type=bind,src=$BASEPATH/tv,dst=/tv \
   --mount type=bind,src=/mnt/nas/downloads/transmission/downloads,dst=/downloads \
