@@ -2,7 +2,7 @@
 # https://docs.linuxserver.io/images/docker-sonarr
 
 UID=1003
-GID=1100
+GID=1000
 TIMEZONE="America/Chicago"
 NAME=sonarr
 BASEPATH=/mnt/nas/downloads/$NAME
