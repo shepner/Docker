@@ -21,5 +21,5 @@ sudo docker service create \
   --mount type=bind,src=/etc/localtime,dst=/etc/localtime,readonly=1 \
   --mount type=bind,src=$BASEPATH/config,dst=/config \
   --mount type=bind,src=/mnt/nas/media/Videos,dst=/tv \
-  --mount type=bind,src=/mnt/nas/downloads/transmission/downloads,dst=/downloads \
+  --mount type=bind,src=/mnt/nas/downloads/transmission/downloads/complete,dst=/downloads \
   linuxserver/sonarr
