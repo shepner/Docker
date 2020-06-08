@@ -20,5 +20,5 @@ sudo docker service create \
   --publish published=8181,target=8081,protocol=tcp,mode=ingress \
   --mount type=bind,src=$BASEPATH/config,dst=/config \
   --mount type=bind,src=/mnt/nas/media/Videos,dst=/tv \
-  --mount type=bind,src=/mnt/nas/downloads/transmission/downloads/complete,dst=/downloads \
+  --mount type=bind,src=/mnt/nas/downloads/transmission/downloads,dst=/downloads \
   linuxserver/sickchill
