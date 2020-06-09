@@ -12,6 +12,7 @@ mkdir -p $BASEPATH/downloads
 
 sudo docker service create \
   --name $NAME \
+  --hostname $NAME \
   --constraint 'node.role != manager' \
   --env PUID=$UID \
   --env PGID=$GID \
