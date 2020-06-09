@@ -13,6 +13,7 @@ mkdir -p $BASEPATH/config
 
 sudo docker service create \
   --name $NAME \
+  --hostname $NAME \
   --constraint 'node.role != manager' \
   --env PUID=$UID \
   --env PGID=$GID \
