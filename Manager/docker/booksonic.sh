@@ -1,9 +1,6 @@
 #!/bin/sh
 # https://docs.linuxserver.io/images/docker-booksonic
 
-# having trouble indexing the audio books
-
-
 UID=1003
 GID=1000
 TIMEZONE="America/Chicago"
