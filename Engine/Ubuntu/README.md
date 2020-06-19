@@ -96,6 +96,11 @@ sudo mount -a
 sudo reboot
 ```
 
+### CIFS support
+```
+sudo apt install cifs-utils
+```
+
 
 ---
 
