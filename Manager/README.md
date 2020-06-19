@@ -92,6 +92,11 @@ sudo mount -a
 #sudo chown -R docker:docker /mnt/nas/docker
 ```
 
+### CIFS support
+```
+sudo apt install cifs-utils
+```
+
 ### Install Docker software
 
 [Docker CE for Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
