@@ -92,15 +92,15 @@ sudo mount -a
 #sudo chown -R dockerengine:docker /mnt/nas/docker
 ```
 
-``` Shell
-sudo reboot
-```
-
 ### CIFS support
-```
+``` shell
 sudo apt install cifs-utils
 ```
 
+
+``` Shell
+sudo reboot
+```
 
 ---
 
