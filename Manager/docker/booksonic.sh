@@ -19,7 +19,7 @@ sudo docker service create \
   --env TZ=$TIMEZONE \
   --publish published=4040,target=4040,protocol=tcp,mode=ingress \
   --mount type=bind,src=$BASEPATH/config,dst=/config \
-  --mount type=bind,src=/mnt/nas/media/Audio\ Books,dst=/audiobooks \
+  --mount type=bind,src=/mnt/nas/media/Audiobook,dst=/audiobooks \
   linuxserver/booksonic
   
 
