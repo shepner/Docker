@@ -8,7 +8,7 @@ NAME=transmission
 BASEPATH=/mnt/nas/downloads/$NAME
 
 mkdir -p $BASEPATH/config
-#mkdir -p $BASEPATH/watch
+mkdir -p $BASEPATH/watch
 mkdir -p $BASEPATH/downloads
 
 sudo docker service create \
@@ -21,6 +21,6 @@ sudo docker service create \
   --publish published=51413,target=51413,protocol=tcp,mode=ingress \
   --publish published=51413,target=51413,protocol=udp,mode=ingress \
   --mount type=bind,src=$BASEPATH/config,dst=/config \
-  --mount type=bind,src=/mnt/nas/downloads/sickchill/config/nzbblackhole,dst=/watch \
+  --mount type=bind,src=$BASEPATH/watch,dst=/watch \
   --mount type=bind,src=$BASEPATH/downloads,dst=/downloads \
   linuxserver/transmission
