@@ -84,17 +84,27 @@ sudo apt-get install -y nfs-common
 sudo mkdir -p /mnt/nas/docker
 echo "nas:/data1/docker /mnt/nas/docker nfs rw 0 0" | sudo tee --append /etc/fstab
 
-sudo mkdir -p /mnt/nas/downloads
-echo "nas:/mnt/data1/downloads /mnt/nas/downloads nfs rw 0 0" | sudo tee --append /etc/fstab
+#sudo mkdir -p /mnt/nas/downloads
+#echo "nas:/mnt/data1/downloads /mnt/nas/downloads nfs rw 0 0" | sudo tee --append /etc/fstab
 
 sudo mount -a
 
 #sudo chown -R docker:docker /mnt/nas/docker
 ```
 
-### CIFS support
+### CIFS support ([article](https://wiki.ubuntu.com/MountWindowsSharesPermanently))
 ```
 sudo apt install cifs-utils
+
+sh -c 'cat > /home/docker/.smbcredentials << EOF
+username=docker
+password=mspassword
+domain=
+EOF'
+chmod 600 /home/docker/.smbcredentials
+
+sudo mkdir -p /mnt/nas/downloads
+echo "//nas/downloads /mnt/nas/downloads cifs rw,credentials=/home/docker/.smbcredentials 0 0" | sudo tee --append /etc/fstab
 ```
 
 ### Install Docker software
