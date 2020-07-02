@@ -1,8 +1,10 @@
 #!/bin/sh
 # https://docs.linuxserver.io/images/docker-transmission
 
-UID=1003
-GID=1000
+#CUID=1003
+#CGID=1000
+CUID=0
+CGID=0
 TIMEZONE="America/Chicago"
 NAME=transmission
 BASEPATH=/mnt/nas/downloads/$NAME
@@ -14,8 +16,8 @@ mkdir -p $BASEPATH/downloads
 sudo docker service create \
   --name $NAME \
   --constraint 'node.role != manager' \
-  --env PUID=$UID \
-  --env PGID=$GID \
+  --env PUID=$CUID \
+  --env PGID=$CGID \
   --env TZ=$TIMEZONE \
   --publish published=9091,target=9091,protocol=tcp,mode=ingress \
   --publish published=51413,target=51413,protocol=tcp,mode=ingress \
