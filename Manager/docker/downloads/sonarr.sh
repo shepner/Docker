@@ -1,8 +1,10 @@
 #!/bin/sh
 # https://docs.linuxserver.io/images/docker-sonarr
 
-UID=1003
-GID=1000
+#CUID=1003
+#CGID=1000
+CUID=0
+CGID=0
 TIMEZONE="America/Chicago"
 NAME=sonarr
 BASEPATH=/mnt/nas/downloads/$NAME
@@ -14,8 +16,8 @@ mkdir -p $BASEPATH/config
 sudo docker service create \
   --name $NAME \
   --constraint 'node.role != manager' \
-  --env PUID=$UID \
-  --env PGID=$GID \
+  --env PUID=$CUID \
+  --env PGID=$CGID \
   --env TZ=$TIMEZONE \
   --publish published=8989,target=8989,protocol=tcp,mode=ingress \
   --mount type=bind,src=/etc/localtime,dst=/etc/localtime,readonly=1 \
