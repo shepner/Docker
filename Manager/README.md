@@ -81,13 +81,13 @@ bash <(curl -s https://raw.githubusercontent.com/shepner/Docker/master/Manager/H
 ``` shell
 sudo apt-get install -y nfs-common
 
-sudo mkdir -p /mnt/nas/docker
-echo "nas:/data1/docker /mnt/nas/docker nfs rw 0 0" | sudo tee --append /etc/fstab
+#sudo mkdir -p /mnt/nas/docker
+#echo "nas:/data1/docker /mnt/nas/docker nfs rw 0 0" | sudo tee --append /etc/fstab
 
 #sudo mkdir -p /mnt/nas/downloads
 #echo "nas:/mnt/data1/downloads /mnt/nas/downloads nfs rw 0 0" | sudo tee --append /etc/fstab
 
-sudo mount -a
+#sudo mount -a
 
 #sudo chown -R docker:docker /mnt/nas/docker
 ```
@@ -103,8 +103,13 @@ domain=
 EOF'
 chmod 600 /home/docker/.smbcredentials
 
-sudo mkdir -p /mnt/nas/downloads
-echo "//nas/downloads /mnt/nas/downloads cifs rw,credentials=/home/docker/.smbcredentials 0 0" | sudo tee --append /etc/fstab
+sudo mkdir -p /mnt/nas/docker1
+echo "//nas/docker1 /mnt/nas/docker1 cifs rw,credentials=/home/docker/.smbcredentials 0 0" | sudo tee --append /etc/fstab
+
+sudo mkdir -p /mnt/nas/docker
+echo "//nas/docker   /mnt/nas/docker cifs rw,credentials=/home/docker/.smbcredentials 0 0" | sudo tee --append /etc/fstab
+
+sudo mount -a
 ```
 
 ### Install Docker software
