@@ -104,10 +104,10 @@ EOF'
 chmod 600 /home/docker/.smbcredentials
 
 sudo mkdir -p /mnt/nas/docker1
-echo "//nas/docker1 /mnt/nas/docker1 cifs rw,credentials=/home/docker/.smbcredentials 0 0" | sudo tee --append /etc/fstab
+echo "//nas/docker1 /mnt/nas/docker1 cifs rw,uid=docker,gid=asyla,credentials=/home/docker/.smbcredentials 0 0" | sudo tee --append /etc/fstab
 
 sudo mkdir -p /mnt/nas/docker
-echo "//nas/docker   /mnt/nas/docker cifs rw,credentials=/home/docker/.smbcredentials 0 0" | sudo tee --append /etc/fstab
+echo "//nas/docker /mnt/nas/docker cifs rw,uid=docker,gid=asyla,credentials=/home/docker/.smbcredentials 0 0" | sudo tee --append /etc/fstab
 
 sudo mount -a
 ```
