@@ -1,13 +1,13 @@
 #!/bin/sh
 # https://docs.linuxserver.io/images/docker-transmission
 
-#CUID=1003
-#CGID=1000
-CUID=0
-CGID=0
+CUID=1003
+CGID=1000
+#CUID=0
+#CGID=0
 TIMEZONE="America/Chicago"
 NAME=transmission
-BASEPATH=/mnt/nas/downloads/$NAME
+BASEPATH=/mnt/nas/docker2/$NAME
 
 mkdir -p $BASEPATH/config
 mkdir -p $BASEPATH/watch
