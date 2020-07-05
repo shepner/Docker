@@ -4,8 +4,8 @@
 # WARNING: This is NOT a Docker Swarm service and runs with privledged rights
 
 
-NAME=DNSmasq-dhcp
-BASEPATH=/mnt/nas/docker/$NAME
+#NAME=DNSmasq-dhcp
+#BASEPATH=/mnt/nas/docker/dnsmasq
 
 #mkdir -p $BASEPATH/config
 #mkdir -p $BASEPATH/webproc_dhcp
@@ -16,11 +16,10 @@ BASEPATH=/mnt/nas/docker/$NAME
 #wget -O $BASEPATH/resolv.conf https://raw.githubusercontent.com/shepner/Docker-DNSmasq/master/resolv.conf
 
 sudo docker create \
-  --name=$NAME \
+  --name=DNSmasq-dhcp \
   --restart unless-stopped \
   --privileged \
   --env WEBPROC_CONF=/mnt/webproc_dhcp/program.toml \
   --mount type=bind,src=/mnt/nas/docker/dnsmasq,dst=/mnt \
   --network host \
   shepner/dnsmasq:latest
-  
