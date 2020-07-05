@@ -15,8 +15,8 @@
 # container, it is possible to move the original Library folder to a new (shared) location
 # and point the container at it.  You will also want to do the same with your media folder.
 # For each, setup symbolic links as appropriate:
-#   `ln -s /mnt/nas/docker/plex/config /var/lib/plexmediaserver`
-#   `ln -s <old mountpoint> /data` 
+#   `ln -s /mnt/nas/docker1/plex/config /var/lib/plexmediaserver`
+#   `ln -s /mnt/nas/media /data` 
 # and then update the Plex library folders to be `'/data/<remaining orig path>'.  This gives
 # a very transparant method to migrate from the old server to the new container and back
 # be sure the file permissions are correct on all folders
