@@ -3,8 +3,6 @@
 
 CUID=1003
 CGID=1000
-#CUID=0
-#CGID=0
 TIMEZONE="America/Chicago"
 NAME=transmission
 BASEPATH=/mnt/nas/docker1/$NAME
