@@ -78,8 +78,8 @@ first, update the hosts file for the NFS host
 sudo apt-get update
 sudo apt-get install -y nfs-common
 
-sudo mkdir -p /mnt/nas/docker
-echo "nas:/mnt/data2/docker /mnt/nas/docker nfs rw 0 0" | sudo tee --append /etc/fstab
+#sudo mkdir -p /mnt/nas/docker
+#echo "nas:/mnt/data2/docker /mnt/nas/docker nfs rw 0 0" | sudo tee --append /etc/fstab
 
 #sudo mkdir -p /mnt/nas/media
 #echo "nas:/mnt/data1/media /mnt/nas/media nfs rw 0 0" | sudo tee --append /etc/fstab
@@ -103,11 +103,14 @@ domain=
 EOF'
 chmod 600 /home/docker/.smbcredentials
 
-sudo mkdir -p /mnt/nas/downloads
-echo "//nas/downloads /mnt/nas/downloads cifs rw,credentials=/home/docker/.smbcredentials 0 0" | sudo tee --append /etc/fstab
+sudo mkdir -p /mnt/nas/docker1
+echo "//nas/docker1 /mnt/nas/docker1 cifs rw,uid=docker,gid=asyla,credentials=/home/docker/.smbcredentials 0 0" | sudo tee --append /etc/fstab
+
+sudo mkdir -p /mnt/nas/docker
+echo "//nas/docker /mnt/nas/docker cifs rw,uid=docker,gid=asyla,credentials=/home/docker/.smbcredentials 0 0" | sudo tee --append /etc/fstab
 
 sudo mkdir -p /mnt/nas/media
-echo "//nas/media /mnt/nas/media cifs rw,credentials=/home/docker/.smbcredentials 0 0" | sudo tee --append /etc/fstab
+echo "//nas/media /mnt/nas/media cifs rw,uid=docker,gid=asyla,credentials=/home/docker/.smbcredentials 0 0" | sudo tee --append /etc/fstab
 
 sudo mount -a
 ```
