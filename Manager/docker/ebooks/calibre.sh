@@ -6,8 +6,8 @@
 
 # Dont use the webserver.  Rather, use [cops](https://github.com/shepner/Docker/blob/master/Manager/docker/ebooks/cops.sh) instead
 
-UID=1003
-GID=1000
+CUID=1003
+CGID=1000
 TIMEZONE="America/Chicago"
 NAME=calibre
 BASEPATH=/mnt/nas/docker/$NAME
@@ -18,8 +18,8 @@ sudo docker service create \
   --name $NAME \
   --hostname $NAME \
   --constraint 'node.role != manager' \
-  --env PUID=$UID \
-  --env PGID=$GID \
+  --env PUID=$CUID \
+  --env PGID=$CGID \
   --env TZ=$TIMEZONE \
   --publish published=6080,target=8080,protocol=tcp,mode=ingress \
   --mount type=bind,src=$BASEPATH/config,dst=/config \
