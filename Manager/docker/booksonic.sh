@@ -1,8 +1,8 @@
 #!/bin/sh
 # https://docs.linuxserver.io/images/docker-booksonic
 
-UID=1003
-GID=1000
+CUID=1003
+CGID=1000
 TIMEZONE="America/Chicago"
 NAME=booksonic
 BASEPATH=/mnt/nas/docker/$NAME
@@ -14,8 +14,8 @@ mkdir -p $BASEPATH/config
 sudo docker service create \
   --name $NAME \
   --constraint 'node.role != manager' \
-  --env PUID=$UID \
-  --env PGID=$GID \
+  --env PUID=$CUID \
+  --env PGID=$CGID \
   --env TZ=$TIMEZONE \
   --publish published=4040,target=4040,protocol=tcp,mode=ingress \
   --mount type=bind,src=$BASEPATH/config,dst=/config \
