@@ -7,7 +7,7 @@ CGID=1000
 #CGID=0
 TIMEZONE="America/Chicago"
 NAME=transmission
-BASEPATH=/mnt/nas/docker2/$NAME
+BASEPATH=/mnt/nas/docker1/$NAME
 
 mkdir -p $BASEPATH/config
 mkdir -p $BASEPATH/watch
