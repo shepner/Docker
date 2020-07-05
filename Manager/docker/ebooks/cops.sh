@@ -3,8 +3,8 @@
 # http://blog.slucas.fr/en/oss/calibre-opds-php-server
 
 NAME=cops
-UID=1003
-GID=1100
+CUID=1003
+CGID=1000
 TIMEZONE="America/Chicago"
 BASEPATH=/mnt/nas/docker/$NAME
 
