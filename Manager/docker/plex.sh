@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# plex just wont work when /var/lib/plexmediaserver is a mount.  Until they change something, dont bother running this in a container
+
+
+
 # do everything needed to run Plex in a Docker container, permit direct access from the local network,
 # make it possible so it can be accessed from the internet, *and* install a plugin.
 #
