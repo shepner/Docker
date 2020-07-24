@@ -19,6 +19,7 @@ sudo adduser --home /home/docker --uid 1003 --gid 1000 --shell /bin/bash docker
 sudo gpasswd -a docker sudo
 ```
 you may need to fix the group name
+
 6. setup ssh keys:
 ``` shell
 DHOST=<host IP>
