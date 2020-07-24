@@ -31,6 +31,7 @@ ssh docker@$DHOST "chmod 600 .ssh/docker_rsa"
 scp ~/.ssh/config docker@$DHOST:.ssh/
 ```
    This might also be a good point to update `~/.ssh/config` so specifying the user ID and identity file is not needed
+
 7. ssh to the host `ssh docker@host>` and [disable the local dns listener](https://mmoapi.com/post/how-to-disable-dnsmasq-port-53-listening-on-ubuntu-18-04) (might require a reboot)
 ``` shell
 #sudo netstat -tulnp | grep 53
