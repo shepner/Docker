@@ -32,7 +32,7 @@ scp ~/.ssh/config docker@$DHOST:.ssh/
 ```
    This might also be a good point to update `~/.ssh/config` so specifying the user ID and identity file is not needed
 
-7. ssh to the host `ssh docker@host>` and [disable the local dns listener](https://mmoapi.com/post/how-to-disable-dnsmasq-port-53-listening-on-ubuntu-18-04) (might require a reboot)
+7. ssh to the host `ssh docker@<host>` and [disable the local dns listener](https://mmoapi.com/post/how-to-disable-dnsmasq-port-53-listening-on-ubuntu-18-04) (might require a reboot)
 ``` shell
 #sudo netstat -tulnp | grep 53
 echo 'DNSStubListener=no' | sudo tee --append /etc/systemd/resolved.conf
@@ -96,7 +96,7 @@ sudo mount -a
 
 ### CIFS support ([article](https://wiki.ubuntu.com/MountWindowsSharesPermanently))
 ```
-sudo apt install cifs-utils
+sudo apt install -y cifs-utils
 
 sh -c 'cat > /home/docker/.smbcredentials << EOF
 username=docker
