@@ -41,6 +41,15 @@ setup-alpine
 reboot
 ```
 
+Create the docker account:
+
+``` shell
+addgroup -g 1000 asyla
+adduser -s /bin/bash -G asyla -u 1003 docker
+```
+
+
+
 
 [Install Alpine on VMWare](https://wiki.alpinelinux.org/wiki/Install_Alpine_on_VMWare):
 
