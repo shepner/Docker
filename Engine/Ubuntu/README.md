@@ -27,7 +27,7 @@ ssh-copy-id -i ~/.ssh/docker_rsa docker@$DHOST
 
 scp ~/.ssh/docker_rsa.pub docker@$DHOST:.ssh/
 scp ~/.ssh/docker_rsa docker@$DHOST:.ssh/
-ssh docker@$DHOST "chmod 600 .ssh/docker_rsa
+ssh docker@$DHOST "chmod 600 .ssh/docker_rsa"
 scp ~/.ssh/config docker@$DHOST:.ssh/
 ```
    This might also be a good point to update `~/.ssh/config` so specifying the user ID and identity file is not needed
