@@ -222,7 +222,15 @@ Instructions for what to do with this: https://help.ubuntu.com/community/KVM
 
 ## [Docker](https://www.docker.com/)
 
-[Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/):
+### Create docker service account
+
+``` shell
+sudo adduser --home /home/docker --uid 1003 --gid 1000 --shell /bin/bash docker
+
+sudo gpasswd -a docker sudo
+```
+
+### [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/):
 
 ``` shell
 # Update the apt package index and install packages to allow apt to use a repository over HTTPS:
@@ -250,7 +258,8 @@ sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 ```
 
-Install [Docker Compose](https://docs.docker.com/compose/install/)
+### Install [Docker Compose](https://docs.docker.com/compose/install/)
+
 ``` shell
 sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
