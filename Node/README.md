@@ -99,7 +99,7 @@ sudo zfs create data1/docker
 sudo zfs create data1/kvm
 ```
 
-### setup NFS
+## setup NFS
 ``` shell
 sudo apt-get install -y nfs-common
 
