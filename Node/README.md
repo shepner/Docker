@@ -49,7 +49,20 @@ nameserver 208.67.220.220
 EOF'
 ```
 
+7. Disk monitoring
 
+``` shell
+sudo apt install -y smartmontools
+
+systemctl status smartd
+```
+
+8. Forward email
+
+``` shell
+echo "`id -un`@asyla.org" > ~/.forward
+sudo echo "`id -un`@asyla.org" > /root/.forward
+```
 
 
 
