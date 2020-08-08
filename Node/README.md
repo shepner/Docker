@@ -61,13 +61,13 @@ systemctl status smartd
 
 ``` shell
 echo "`id -un`@asyla.org" > ~/.forward
-sudo echo "`id -un`@asyla.org" > /root/.forward
+echo "`id -un`@asyla.org" | sudo tee -a /root/.forward
 ```
 
 
 
 
-3. setup ssh keys
+?. setup ssh keys
 
 ``` shell
 nodes[0]="n01"
