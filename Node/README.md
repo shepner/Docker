@@ -111,13 +111,15 @@ sudo zfs create data1/vm
 
 [Creating and Destroying ZFS Snapshots](https://docs.oracle.com/cd/E19253-01/819-5461/gbcya/index.html)
 
-Example:
+create an initial set of snapshots to work with
 
 ``` shell
-sudo zfs snapshot data1/vm@n03_`date +"%Y%m%d_%H%M%S"`
+sudo zfs snapshot data1/docker@auto-`date +"%Y-%m-%d_%H-%M"`
+sudo zfs snapshot data1/vm@auto-`date +"%Y-%m-%d_%H-%M"`
 zfs list -t snapshot
 #sudo zfs destroy data1/vm@n03_20200808_165344
 ```
+
 Schedule the creation of snapshots
 
 ``` shell
@@ -127,13 +129,13 @@ crontab -e
 Add the following to the end of the file.  Be sure to set the hostname as appropriate:
 
 ``` crontab
-0 */6 * * * zfs snapshot data1/vm@n03_`date +"%Y%m%d_%H%M%S"`
-0 */6 * * * zfs snapshot data1/docker@n03_`date +"%Y%m%d_%H%M%S"`
+0 */6 * * * zfs snapshot data1/vm@auto-`date +"%Y-%m-%d_%H-%M"`
+0 */6 * * * zfs snapshot data1/docker@auto-`date +"%Y-%m-%d_%H-%M"`
 ```
 
 ([zrep](http://www.bolthole.com/solaris/zrep/) might be another option too)
 
-Enable root ssh
+Enable ssh login for root
 
 ``` shell
 echo "PermitRootLogin yes" | sudo tee -a /etc/ssh/sshd_config
@@ -143,8 +145,8 @@ sudo systemctl restart sshd
 Do this part on FreeNAS:
 
 1. Storage > Pools > <pool> > Add Dataset
-   Create a new dataset named `<hostname>`
-   Create another dataset within called `<poolname>`
+   Create a new dataset named `<hostname>-<poolname>`
+   Create another dataset within called `<poolname>` for each
 2. System > Generate Keypairs
    Create/generate key for the host
    Add the public key to the new host
@@ -157,6 +159,10 @@ sudo vi /root/.ssh/authorized_keys
    Add a new connection for the host using the key
    Discover remote host key, then save
 4. Tasks > Replication Tasks
+   Create a replication job per dataset
+   Keep the data for 2 days
+   Replicate every */6 hours
+   Save then go back in and check "Replicate from scratch if incremental is not possible"
 
 ## setup NFS
 
