@@ -166,23 +166,26 @@ sudo vi /root/.ssh/authorized_keys
 
 ## setup NFS
 
-<not sure is this is really needed or not>
+<not sure how much of this is really needed or not>
 
 ``` shell
 sudo apt-get install -y nfs-common
 
+sudo mkdir -p /mnt/nas/data1/iso
+echo "nas:/mnt/data1/iso /mnt/nas/data1/iso nfs rw 0 0" | sudo tee --append /etc/fstab
+
 sudo mkdir -p /mnt/nas/data1/docker
-echo "nas:/data1/docker /mnt/nas/data1/docker nfs rw 0 0" | sudo tee --append /etc/fstab
+echo "nas:/mnt/data1/docker /mnt/nas/data1/docker nfs rw 0 0" | sudo tee --append /etc/fstab
 sudo mkdir -p /mnt/nas/data2/docker
-echo "nas:/data2/docker /mnt/nas/data2/docker nfs rw 0 0" | sudo tee --append /etc/fstab
+echo "nas:/mnt/data2/docker /mnt/nas/data2/docker nfs rw 0 0" | sudo tee --append /etc/fstab
 
 sudo mkdir -p /mnt/nas/data1/vm
-echo "nas:/data1/vm /mnt/nas/data1/vm nfs rw 0 0" | sudo tee --append /etc/fstab
+echo "nas:/mnt/data1/vm /mnt/nas/data1/vm nfs rw 0 0" | sudo tee --append /etc/fstab
 sudo mkdir -p /mnt/nas/data2/vm
-echo "nas:/data1/vm /mnt/nas/data2/vm nfs rw 0 0" | sudo tee --append /etc/fstab
+echo "nas:/mnt/data1/vm /mnt/nas/data2/vm nfs rw 0 0" | sudo tee --append /etc/fstab
 
 sudo mkdir -p /mnt/nas/data1/media
-echo "nas:/data1/media /mnt/nas/data1/media nfs rw 0 0" | sudo tee --append /etc/fstab
+echo "nas:/mnt/data1/media /mnt/nas/data1/media nfs rw 0 0" | sudo tee --append /etc/fstab
 
 sudo mount -a
 ```
