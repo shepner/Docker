@@ -195,12 +195,6 @@ Install Necessary Packages
 sudo apt-get -y install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
 ```
 
-This requires a GUI:
-
-``` shell
-sudo apt-get install virt-manager
-```
-
 Add Users to Groups:
 
 ``` shell
@@ -210,7 +204,6 @@ sudo adduser `id -un` kvm
 
 Be sure to logout/login again
 
-
 Verify Installation:
 
 ``` shell
@@ -218,6 +211,101 @@ virsh list --all
 ```
 
 Instructions for what to do with this: https://help.ubuntu.com/community/KVM
+
+### GUI management with [virt-manager](https://virt-manager.org/):
+
+WARNING: This will install X onto the console of the server!
+
+Install [virt-manager](https://virt-manager.org/) which is a (the?) KVM GUI, [a window manager, and VNC](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-ubuntu-20-04):
+
+``` shell
+# select the default options when prompted
+sudo apt-get -y install virt-manager xfce4 xfce4-goodies tightvncserver
+```
+
+VNC startup script:
+
+``` shell
+cat > ~/.vnc/xstartup << EOF
+#!/bin/bash
+xrdb $HOME/.Xresources
+virt-manager &
+startxfce4 &
+#virt-manager &
+EOF
+chmod 754 ~/.vnc/xstartup
+```
+
+Set the VNC password:
+
+``` shell
+vncserver
+
+vncserver -kill :1
+```
+
+Note that `vncpasswd` can be used to change the password later
+
+Setup and run VNC as a service:
+
+``` shell
+sudo sh -c 'cat > /etc/systemd/system/vncserver@.service << EOF
+[Unit]
+Description=Start TightVNC server at startup
+After=syslog.target network.target
+
+[Service]
+Type=forking
+User=shepner
+Group=asyla
+WorkingDirectory=/home/shepner
+
+PIDFile=/home/shepner/.vnc/%H:%i.pid
+ExecStartPre=-/usr/bin/vncserver -kill :%i > /dev/null 2>&1
+#ExecStart=/usr/bin/vncserver -depth 24 -geometry 1280x800 -localhost :%i
+ExecStart=/usr/bin/vncserver -depth 24 -geometry 2048x1280 :%i
+ExecStop=/usr/bin/vncserver -kill :%i
+
+[Install]
+WantedBy=multi-user.target
+EOF'
+
+# Make the system aware of the new unit file
+sudo systemctl daemon-reload
+# Enable the unit file
+sudo systemctl enable vncserver@1.service
+# Start the service
+sudo systemctl start vncserver@1
+# Verify that it started
+#sudo systemctl status vncserver@1
+```
+
+The VNC URL is: `vnc://<hostname>:5901`
+
+### Web based management with [Cockpit](https://cockpit-project.org/)
+
+Install Cocpit and the Virtual Machines plugin ([info](https://www.answertopia.com/ubuntu/creating-ubuntu-kvm-virtual-machines-using-cockpit-and-virt-manager/))
+
+``` shell
+sudo apt-get install -y cockpit cockpit-machines
+```
+
+https://ip-address-of-machine:9090
+
+There are some compatability [issues](https://github.com/cockpit-project/cockpit/issues/8477) with Ubuntu 20.04 and [this](https://github.com/cockpit-project/cockpit/issues/8477#issuecomment-647048774) should fix them:
+
+``` shell
+# Add the `  renderer: NetworkManager` line to the config file
+#network:
+#  version: 2
+#  renderer: NetworkManager
+sudo vi /etc/netplan/00-installer-config.yaml 
+
+sudo systemctl enable network-manager.service
+sudo systemctl disable systemd-networkd.service
+```
+
+This will break the `/etc/resolv.conf` file so go and redo that step.
 
 
 ## [Docker](https://www.docker.com/)
@@ -263,5 +351,3 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 ``` shell
 sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
-
-
