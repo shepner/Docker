@@ -284,6 +284,8 @@ The VNC URL is: `vnc://<hostname>:5901`
 
 ### Web based management with [Cockpit](https://cockpit-project.org/)
 
+WARNING: Chrome hates the cert this generates and wont let you connect
+
 Install Cocpit and the Virtual Machines plugin ([info](https://www.answertopia.com/ubuntu/creating-ubuntu-kvm-virtual-machines-using-cockpit-and-virt-manager/))
 
 ``` shell
