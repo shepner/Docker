@@ -323,6 +323,7 @@ sudo docker start virtlyst
 * Proxmox VE: cant tell how to just install only the app
 * [WebVirtMgr](http://retspen.github.io/): sounds promising but requires effort
 * [mistio/mist-ce](https://github.com/mistio/mist-ce/releases/) large, difficult, and not all that great
+* [Virtlyst](https://github.com/cutelyst/Virtlyst/wiki/Running-with-Docker) broken and hasnt been updated in 1+ yrs
 
 #### [virt-manager](https://virt-manager.org/):
 
