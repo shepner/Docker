@@ -1,6 +1,6 @@
 # Install Notes
 
-## Install server
+## Install server from console
 
 1. have a physical server suitable to run [Docker](https://www.docker.com/) containers, VMs (via [KVM](https://www.linux-kvm.org/)), while using ZFS
 
@@ -9,7 +9,45 @@
 
 2. Download/install [Ubuntu Server 20.04.01 LTS](https://ubuntu.com/download/server/thank-you?version=20.04.1&architecture=amd64)
 
-3. Patch the system
+    * use fixed IP address, install OpenSSH
+
+## User account stuff
+
+### Remove what little bits of pesky security we have
+
+``` shell
+echo "`id -un` ALL=(ALL) NOPASSWD: ALL" | sudo EDITOR='tee -a' visudo
+```
+
+### Setup ssh keys
+
+Do this from the local workstation:
+
+``` shell
+DHOST=vmh03
+ssh-copy-id -i ~/.ssh/shepner_rsa.pub $DHOST
+scp ~/.ssh/shepner_rsa $DHOST:.ssh/shepner_rsa
+scp ~/.ssh/shepner_rsa.pub $DHOST:.ssh/shepner_rsa.pub
+scp ~/.ssh/config $DHOST:.ssh/config
+ssh $DHOST "chmod -R 700 ~/.ssh"
+```
+
+### Fix groups
+
+``` shell
+sudo groupmod `id -un` -n asyla
+```
+
+### Forward email
+
+``` shell
+echo "`id -un`@asyla.org" > ~/.forward
+echo "`id -un`@asyla.org" | sudo tee -a /root/.forward
+```
+
+## Initial config items
+
+### Patch the system
 
 ``` shell
 cat > ~/update.sh << EOF
@@ -19,7 +57,20 @@ chmod 754 ~/update.sh
 ~/update.sh
 ```
 
-4. [Disable the local dns listener](https://mmoapi.com/post/how-to-disable-dnsmasq-port-53-listening-on-ubuntu-18-04) (might require a reboot)
+### Set the timezone
+
+``` shell
+sudo timedatectl set-timezone America/Chicago
+```
+
+### Install net-tools
+
+``` shell
+sudo apt-get update
+sudo apt-get install -y net-tools
+```
+
+### [Disable the local dns listener](https://mmoapi.com/post/how-to-disable-dnsmasq-port-53-listening-on-ubuntu-18-04) (might require a reboot)
 
 ``` shell
 #sudo netstat -tulnp | grep 53
@@ -37,46 +88,13 @@ nameserver 208.67.220.220
 EOF'
 ```
 
-5. Disk monitoring
+### Disk monitoring
 
 ``` shell
+sudo apt update
 sudo apt install -y smartmontools
 
 systemctl status smartd
-```
-
-## User account stuff
-
-### Setup ssh keys
-
-Do this from the local workstation:
-
-``` shell
-DHOST=n03
-ssh-copy-id -i ~/.ssh/shepner_rsa.pub $DHOST
-scp ~/.ssh/shepner_rsa $DHOST:.ssh/shepner_rsa
-scp ~/.ssh/shepner_rsa.pub $DHOST:.ssh/shepner_rsa.pub
-scp ~/.ssh/config $DHOST:.ssh/config
-ssh $DHOST "chmod -R 700 ~/.ssh"
-```
-
-### Fix groups
-
-``` shell
-sudo groupmod `id -un` -n asyla
-```
-
-### Remove what little bits of pesky security we have
-
-``` shell
-echo "`id -un` ALL=(ALL) NOPASSWD: ALL" | sudo EDITOR='tee -a' visudo
-```
-
-### Forward email
-
-``` shell
-echo "`id -un`@asyla.org" > ~/.forward
-echo "`id -un`@asyla.org" | sudo tee -a /root/.forward
 ```
 
 ## [OpenZFS](https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/index.html#installation)
@@ -87,6 +105,8 @@ Install utilities:
 sudo apt update
 sudo apt -y install zfsutils-linux
 ```
+
+Run `sudo zpool import -f data1` to import an existing pool, otherwise do the following
 
 Show what disks are on the system:
 
@@ -123,7 +143,7 @@ zfs list -t snapshot
 Schedule the creation of snapshots
 
 ``` shell
-crontab -e
+sudo ucrontab -e
 ```
 
 Add the following to the end of the file.  Be sure to set the hostname as appropriate:
@@ -132,8 +152,6 @@ Add the following to the end of the file.  Be sure to set the hostname as approp
 0 */6 * * * zfs snapshot data1/vm@auto-`date +"%Y-%m-%d_%H-%M"`
 0 */6 * * * zfs snapshot data1/docker@auto-`date +"%Y-%m-%d_%H-%M"`
 ```
-
-([zrep](http://www.bolthole.com/solaris/zrep/) might be another option too)
 
 Enable ssh login for root
 
@@ -166,11 +184,15 @@ sudo vi /root/.ssh/authorized_keys
 
 ## setup NFS
 
-<not sure how much of this is really needed or not>
+``` shell
+sudo apt update
+sudo apt-get install -y nfs-common
+```
+
+Setup mounts
+<not sure how much of this is really needed>
 
 ``` shell
-sudo apt-get install -y nfs-common
-
 sudo mkdir -p /mnt/nas/data1/iso
 echo "nas:/mnt/data1/iso /mnt/nas/data1/iso nfs rw 0 0" | sudo tee --append /etc/fstab
 
@@ -190,11 +212,57 @@ echo "nas:/mnt/data1/media /mnt/nas/data1/media nfs rw 0 0" | sudo tee --append 
 sudo mount -a
 ```
 
+## [Docker](https://www.docker.com/)
+
+### Create docker service account
+
+``` shell
+sudo adduser --home /home/docker --uid 1003 --gid 1000 --shell /bin/bash docker
+
+sudo gpasswd -a docker sudo
+```
+
+### [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/):
+
+``` shell
+# Update the apt package index and install packages to allow apt to use a repository over HTTPS:
+sudo apt-get update
+
+sudo apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+
+# Add Docker’s official GPG key:
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+# Use the following command to set up the stable repository
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+# INSTALL DOCKER ENGINE
+# Update the apt package index, and install the latest version of Docker Engine and containerd, or go to the next step to install a specific version:
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+```
+
+### Install [Docker Compose](https://docs.docker.com/compose/install/)
+
+``` shell
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod 755 /usr/local/bin/docker-compose
+```
+
 ## [KVM](https://help.ubuntu.com/community/KVM/Installation)
 
 Install Necessary Packages
 
 ``` shell
+sudo apt update
 sudo apt-get -y install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
 ```
 
@@ -207,6 +275,10 @@ sudo adduser `id -un` kvm
 
 Be sure to logout/login again
 
+``` shell
+logout
+```
+
 Verify Installation:
 
 ``` shell
@@ -215,15 +287,54 @@ virsh list --all
 
 Instructions for what to do with this: https://help.ubuntu.com/community/KVM
 
-### GUI management with [virt-manager](https://virt-manager.org/):
+### GUI management
 
+[Virtlyst](https://github.com/cutelyst/Virtlyst/wiki/Running-with-Docker)
+
+``` shell
+git clone https://github.com/cutelyst/Virtlyst.git virtlyst
+cd virtlyst
+sudo docker build -t virtlyst .
+
+docker run -ti --init --name virtlyst -p 3000:3000 -v /run/libvirt:/run/libvirt:rw virtlyst
+```
+
+Connect to http://x.x.x.x:3000/
+
+The username is "admin". The password is generated randomly, and is displayed in the container logs at startup.
+
+Create a connection of type "Local socket", with any name you like, and you'll be able to see the VMs running on this host.
+
+After initial use of virtlyst, you may find the web interface stops working and reports: `You have no connection`
+
+This can be fixed by running:
+
+``` shell
+sudo docker stop virtlyst
+sudo docker start virtlyst
+```
+
+#### Other (generally worse) options:
+
+* [Cockpit](https://cockpit-project.org/)
+  Avoid: installed fine but very limited VM administration and the "fixes" to make the app work with Umbuntu broke the system
+* [oVirt](https://ovirt.org/) Nope.  Requires Cockpit
+* [Kimchi](https://github.com/kimchi-project/kimchi): sounds promising but couldnt get it to install (Python 2 vs 3 issues) and doesnt seem to be very active
+* Proxmox VE: cant tell how to just install only the app
+* [WebVirtMgr](http://retspen.github.io/): sounds promising but requires effort
+* [mistio/mist-ce](https://github.com/mistio/mist-ce/releases/) large, difficult, and not all that great
+
+#### [virt-manager](https://virt-manager.org/):
+
+Best option unless can find something better.
 WARNING: This will install X onto the console of the server!
 
 Install [virt-manager](https://virt-manager.org/) which is a (the?) KVM GUI, [a window manager, and VNC](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-ubuntu-20-04):
 
 ``` shell
 # select the default options when prompted
-sudo apt-get -y install virt-manager xfce4 xfce4-goodies tightvncserver
+#sudo apt-get -y install virt-manager xfce4 xfce4-goodies tightvncserver
+sudo apt-get -y install virt-manager xfce4 tightvncserver
 ```
 
 VNC startup script:
@@ -232,9 +343,8 @@ VNC startup script:
 cat > ~/.vnc/xstartup << EOF
 #!/bin/bash
 xrdb $HOME/.Xresources
-virt-manager &
 startxfce4 &
-#virt-manager &
+virt-manager &
 EOF
 chmod 754 ~/.vnc/xstartup
 ```
@@ -285,74 +395,3 @@ sudo systemctl start vncserver@1
 
 The VNC URL is: `vnc://<hostname>:5901`
 
-### Web based management with [Cockpit](https://cockpit-project.org/)
-
-WARNING: Chrome hates the cert this generates and wont let you connect
-
-Install Cocpit and the Virtual Machines plugin ([info](https://www.answertopia.com/ubuntu/creating-ubuntu-kvm-virtual-machines-using-cockpit-and-virt-manager/))
-
-``` shell
-sudo apt-get install -y cockpit cockpit-machines
-```
-
-https://ip-address-of-machine:9090
-
-There are some compatability [issues](https://github.com/cockpit-project/cockpit/issues/8477) with Ubuntu 20.04 and [this](https://github.com/cockpit-project/cockpit/issues/8477#issuecomment-647048774) should fix them:
-
-``` shell
-# Add the `  renderer: NetworkManager` line to the config file
-#network:
-#  version: 2
-#  renderer: NetworkManager
-sudo vi /etc/netplan/00-installer-config.yaml 
-
-sudo systemctl enable network-manager.service
-sudo systemctl disable systemd-networkd.service
-```
-
-This will break the `/etc/resolv.conf` file so go and redo that step.
-
-
-## [Docker](https://www.docker.com/)
-
-### Create docker service account
-
-``` shell
-sudo adduser --home /home/docker --uid 1003 --gid 1000 --shell /bin/bash docker
-
-sudo gpasswd -a docker sudo
-```
-
-### [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/):
-
-``` shell
-# Update the apt package index and install packages to allow apt to use a repository over HTTPS:
-sudo apt-get update
-
-sudo apt-get install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg-agent \
-    software-properties-common
-
-# Add Docker’s official GPG key:
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-
-# Use the following command to set up the stable repository
-sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
-
-# INSTALL DOCKER ENGINE
-# Update the apt package index, and install the latest version of Docker Engine and containerd, or go to the next step to install a specific version:
-sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-```
-
-### Install [Docker Compose](https://docs.docker.com/compose/install/)
-
-``` shell
-sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-```
