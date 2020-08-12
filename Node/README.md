@@ -289,41 +289,6 @@ Instructions for what to do with this: https://help.ubuntu.com/community/KVM
 
 ### GUI management
 
-[Virtlyst](https://github.com/cutelyst/Virtlyst/wiki/Running-with-Docker)
-
-``` shell
-git clone https://github.com/cutelyst/Virtlyst.git virtlyst
-cd virtlyst
-sudo docker build -t virtlyst .
-
-docker run -ti --init --name virtlyst -p 3000:3000 -v /run/libvirt:/run/libvirt:rw virtlyst
-```
-
-Connect to http://x.x.x.x:3000/
-
-The username is "admin". The password is generated randomly, and is displayed in the container logs at startup.
-
-Create a connection of type "Local socket", with any name you like, and you'll be able to see the VMs running on this host.
-
-After initial use of virtlyst, you may find the web interface stops working and reports: `You have no connection`
-
-This can be fixed by running:
-
-``` shell
-sudo docker stop virtlyst
-sudo docker start virtlyst
-```
-
-#### Other (generally worse) options:
-
-* [Cockpit](https://cockpit-project.org/)
-  Avoid: installed fine but very limited VM administration and the "fixes" to make the app work with Umbuntu broke the system
-* [oVirt](https://ovirt.org/) Nope.  Requires Cockpit
-* [Kimchi](https://github.com/kimchi-project/kimchi): sounds promising but couldnt get it to install (Python 2 vs 3 issues) and doesnt seem to be very active
-* Proxmox VE: cant tell how to just install only the app
-* [WebVirtMgr](http://retspen.github.io/): sounds promising but requires effort
-* [mistio/mist-ce](https://github.com/mistio/mist-ce/releases/) large, difficult, and not all that great
-* [Virtlyst](https://github.com/cutelyst/Virtlyst/wiki/Running-with-Docker) broken and hasnt been updated in 1+ yrs
 
 #### [virt-manager](https://virt-manager.org/):
 
@@ -395,4 +360,15 @@ sudo systemctl start vncserver@1
 ```
 
 The VNC URL is: `vnc://<hostname>:5901`
+
+#### Other (generally worse) options:
+
+* [Cockpit](https://cockpit-project.org/)
+  Avoid: installed fine but very limited VM administration and the "fixes" to make the app work with Umbuntu broke the system
+* [oVirt](https://ovirt.org/) Nope.  Requires Cockpit
+* [Kimchi](https://github.com/kimchi-project/kimchi): sounds promising but couldnt get it to install (Python 2 vs 3 issues) and doesnt seem to be very active
+* Proxmox VE: cant tell how to just install only the app
+* [WebVirtMgr](http://retspen.github.io/): sounds promising but requires effort
+* [mistio/mist-ce](https://github.com/mistio/mist-ce/releases/) large, difficult, and not all that great
+* [Virtlyst](https://github.com/cutelyst/Virtlyst/wiki/Running-with-Docker) broken and hasnt been updated in 1+ yrs
 
