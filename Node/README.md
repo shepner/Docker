@@ -143,14 +143,13 @@ zfs list -t snapshot
 Schedule the creation of snapshots
 
 ``` shell
-sudo ucrontab -e
-```
+sudo sh -c 'cat > /etc/cron.d/zfs-snapshot << EOF
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
-Add the following to the end of the file.  Be sure to set the hostname as appropriate:
-
-``` crontab
-0 */6 * * * zfs snapshot data1/vm@auto-`date +"%Y-%m-%d_%H-%M"`
-0 */6 * * * zfs snapshot data1/docker@auto-`date +"%Y-%m-%d_%H-%M"`
+# take snapshot every 6 hours
+0 */6 * * * root zfs snapshot data1/vm@auto-`date +"%Y-%m-%d_%H-%M"`
+0 */6 * * * root zfs snapshot data1/docker@auto-`date +"%Y-%m-%d_%H-%M"`
+EOF'
 ```
 
 Enable ssh login for root
@@ -204,7 +203,7 @@ echo "nas:/mnt/data2/docker /mnt/nas/data2/docker nfs rw 0 0" | sudo tee --appen
 sudo mkdir -p /mnt/nas/data1/vm
 echo "nas:/mnt/data1/vm /mnt/nas/data1/vm nfs rw 0 0" | sudo tee --append /etc/fstab
 sudo mkdir -p /mnt/nas/data2/vm
-echo "nas:/mnt/data1/vm /mnt/nas/data2/vm nfs rw 0 0" | sudo tee --append /etc/fstab
+echo "nas:/mnt/data2/vm /mnt/nas/data2/vm nfs rw 0 0" | sudo tee --append /etc/fstab
 
 sudo mkdir -p /mnt/nas/data1/media
 echo "nas:/mnt/data1/media /mnt/nas/data1/media nfs rw 0 0" | sudo tee --append /etc/fstab
