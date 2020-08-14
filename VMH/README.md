@@ -143,13 +143,12 @@ zfs list -t snapshot
 Schedule the creation of snapshots
 
 ``` shell
-sudo sh -c 'cat > /etc/cron.d/zfs-snapshot << EOF
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-
-# take snapshot every 6 hours
-0 */6 * * * root zfs snapshot data1/vm@auto-`date +"%Y-%m-%d_%H-%M"`
-0 */6 * * * root zfs snapshot data1/docker@auto-`date +"%Y-%m-%d_%H-%M"`
-EOF'
+(
+echo "PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin" 
+echo "# take snapshot every 6 hours"
+echo '0 */6 * * * root zfs snapshot data1/vm@auto-`date +"%Y-%m-%d_%H-%M"`'
+echo '0 */6 * * * root zfs snapshot data1/docker@auto-`date +"%Y-%m-%d_%H-%M"`'
+) | sudo tee /etc/cron.d/zfs-snapshot
 ```
 
 Enable ssh login for root
