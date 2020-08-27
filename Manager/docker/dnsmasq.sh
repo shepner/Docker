@@ -16,9 +16,11 @@ sudo docker create \
   --name=$NAME \
   --restart unless-stopped \
   --privileged \
-  --env DNSMASQ_CONF=/mnt/config/dnsmasq_combined.conf \
+  --env DNSMASQ_CONF=/mnt/config/dnsmasq.conf \
   --mount type=bind,src=/mnt/nas/docker/dnsmasq,dst=/mnt \
   --network host \
   shepner/dnsmasq:latest
+  
+#  --env DNSMASQ_CONF=/mnt/config/dnsmasq_combined.conf \
 
 sudo docker start dnsmasq
